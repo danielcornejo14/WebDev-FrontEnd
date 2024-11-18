@@ -1,0 +1,13 @@
+<p-inputGroup class="width-input">
+    <input
+        type="text"
+        pInputText
+        placeholder="Search..."
+        (keyup.enter)="emitValue(textInput.value)"
+        #textInput
+    />
+    <p-inputGroupAddon>
+        <i class="pi pi-search"></i>
+    </p-inputGroupAddon>
+
+</p-inputGroup>

@@ -1,0 +1,9 @@
+.width-input {
+    width: 20rem;
+    max-width: 500px;
+    padding: 0.5rem;
+
+    @media (max-width: 600px) {
+        width: 12rem;
+    }
+}

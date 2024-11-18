@@ -1,0 +1,36 @@
+.nav-container {
+  height: 100%;
+}
+
+.tool-backgorund {
+  background-color: #BFE8FD;
+}
+.mobile-sidenav {
+  width: 250px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.button-row {
+  display: flex;
+}
+
+.mobile-menu-button {
+  display: none;
+}
+
+.red-text {
+  color: #FF0000;
+}
+
+@media (max-width: 600px) {
+  .button-row {
+    display: none;
+  }
+
+  .mobile-menu-button {
+    display: block;
+  }
+}

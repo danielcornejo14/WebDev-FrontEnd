@@ -1,0 +1,26 @@
+.custom-card {
+    width: auto;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.image-container {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.main-image {
+    width: 60%;
+    height: auto;
+    max-height: 200px;
+    object-fit: cover;
+}
+
+.secondary-image {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: cover;
+}
