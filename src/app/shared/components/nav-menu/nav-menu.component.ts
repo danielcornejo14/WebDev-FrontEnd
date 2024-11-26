@@ -25,4 +25,5 @@ import { SearchBoxComponent } from "../search-box/search-box.component";
 })
 export class NavMenuComponent {
 
+
 }

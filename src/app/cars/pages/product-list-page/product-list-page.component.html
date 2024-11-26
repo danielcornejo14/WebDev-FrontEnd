@@ -1,0 +1,63 @@
+<div class="container">
+
+  <div class="sidebar">
+    <div class="p-card">
+      <div class="p-card-body">
+        <h3>Filtros</h3>
+        <mat-divider></mat-divider>
+
+        <br>
+        <div>
+          <h6>Precio</h6>
+          <p-slider [(ngModel)]="priceRange" 
+            [min]="0" [max]="maxPrice" 
+            [range]="true"
+            (onChange)="onPriceChange($event)"
+            ></p-slider>
+          <div>
+            <span> ${{ priceRange[0] }} - ${{ priceRange[1] }}</span>
+          </div>
+        </div>
+        <br>
+        
+
+      <mat-divider></mat-divider>
+        <br>
+        <div>
+          <h6>Categorías</h6>
+          <div *ngFor="let category of categories" class="category-container">
+            <p-checkbox 
+              [inputId]="category.name" 
+              [(ngModel)]="category.selected" 
+              binary="true" 
+              (onChange)="onCategoryChange(category)">
+            </p-checkbox>
+            <label [for]="category.name">{{ category.name }}</label>
+          </div>
+        </div>
+        <br>
+
+        <mat-divider></mat-divider>
+        <br>
+
+        <div>
+          <h6>Rating</h6>
+          <p-rating  class="rating-filter" [(ngModel)]= "selectedRating" (onRate)="onRatingChange($event)" [cancel]="false"/>
+        </div>
+        <br>
+      <mat-divider></mat-divider>
+        <br>
+      <h6>Marcas</h6>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="product-grid">
+    <div *ngFor="let product of filteredProducts">
+      <app-featured-card [product]="product"></app-featured-card>
+    </div>
+  </div>
+</div>

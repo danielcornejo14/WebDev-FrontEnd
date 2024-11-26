@@ -1,8 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { CategoryCardComponent } from '../../components/category-card/category-card.component';
 import { FeaturedCardComponent } from '../../components/featured-card/featured-card.component';
-import {MatDividerModule} from '@angular/material/divider';
-import { DiscountCardComponent } from '../../components/discount-card/discount-card.component';
+import { MatDividerModule } from '@angular/material/divider';
+import { CarouselModule } from 'primeng/carousel';
+import { ProductsService } from '../../services/products.service';
+import { Product } from '../../models/products/product';
+import { CategoriesService } from '../../services/categories.service';
+import { Category } from '../../models/products/category';
+import { ButtonModule } from 'primeng/button';
+import { DiscountCardComponent } from "../../components/discount-card/discount-card.component";
 
 
 @Component({
@@ -11,11 +17,52 @@ import { DiscountCardComponent } from '../../components/discount-card/discount-c
   imports: [
     CategoryCardComponent,
     FeaturedCardComponent,
+    DiscountCardComponent,
     MatDividerModule,
-    DiscountCardComponent],
+    CarouselModule,
+    ButtonModule
+  ],
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.scss'
 })
 export class LandingPageComponent {
+  public products: Product[] = [];
+  public categories: Category[] = [];
+  public numVisible: number = 3;
 
+  constructor(
+    private productsService: ProductsService, 
+    private categoriesService: CategoriesService) { }
+
+  ngOnInit(): void {
+    this.loadProducts();
+    this.loadCategories();
+  }
+
+  loadProducts(): void {
+    this.productsService.getProducts().subscribe(products => {
+      this.products = products;
+    });
+  }
+
+  loadCategories(): void {
+    this.categoriesService.getCategories().subscribe(categories => {
+      this.categories = categories;
+      console.log(categories);
+    });
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.updateCarouselItems(event.target.innerWidth);
+  }
+
+  updateCarouselItems(width: number): void {
+    if (width <= 768) { 
+      this.numVisible = 1;
+    } else {
+      this.numVisible = 3;
+    }
+  }
+  
 }

@@ -1,7 +1,22 @@
-<div class="card flex justify-content-center">
-    <p-card header="Advanced Card" subheader="Card Subheader" [style]="{ width: '360px' }">
-        <ng-template pTemplate="header">
-            <img alt="Card" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
-        </ng-template>
+<div class="card-container" (click) = "navigateToProduct()">
+  <p-card class="discount-card">
+
+      <ng-template pTemplate="header">
+        <img class="card-image" [src]="product.image" alt="{{ product.name }}">
+      </ng-template>
+
+      <ng-template pTemplate="title">
+        {{ product.name }}
+      </ng-template>
+
+      <ng-template pTemplate="subtitle">
+        {{ product.brand }}
+      </ng-template>
+
+      <ng-template pTemplate="content">
+        <p class="original-price">Original Price: ${{ product.price }}</p>
+        <p class="discounted-price">Discounted Price: ${{ product.price * 0.8 }}</p> <!-- Assuming a 20% discount -->
+      </ng-template>
+      
     </p-card>
 </div>

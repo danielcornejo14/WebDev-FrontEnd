@@ -1,8 +1,13 @@
-.custom-card {
+.card-container {
     width: auto;
     max-width: 600px;
     margin: 0 auto;
+    transition: transform 0.3s ease-in-out;
 }
+
+.card-container:hover {
+    transform: scale(1.05);
+  }
 
 .image-container {
     display: flex;
@@ -11,16 +16,16 @@
     align-items: flex-start;
 }
 
-.main-image {
-    width: 60%;
-    height: auto;
-    max-height: 200px;
-    object-fit: cover;
+.subtitle-container {
+    display: flex;
+    margin-top: 0.5rem;
+    justify-content: space-evenly;
 }
 
-.secondary-image {
+.main-image {
     width: 100%;
     height: auto;
     max-height: 200px;
     object-fit: cover;
 }
+

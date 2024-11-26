@@ -4,15 +4,15 @@
   }
   
   .category-card {
-    transition: transform 0.3s ease-in-out; /* Añade una transición suave para el efecto hover */
+    transition: transform 0.3s ease-in-out;
   }
   
   .category-card:hover {
-    transform: scale(1.05); /* Aumenta el tamaño del card al pasar el mouse por encima */
+    transform: scale(1.05);
   }
   
   .card-image {
-    width: 100%; /* Asegura que la imagen ocupe todo el ancho del card */
+    width: 100%;
     height: auto;
-    object-fit: cover; /* Ajusta la imagen para que se recorte si es necesario */
+    object-fit: cover;
   }

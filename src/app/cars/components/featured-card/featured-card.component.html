@@ -1,15 +1,21 @@
-<mat-card class="custom-card">
-    <mat-card-header>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="image-container">
-        <img class="main-image" mat-card-image src="../../../../assets/knight/knight1.jpg" alt="Main Image">
-        <div>
-          <img class="secondary-image" mat-card-image src="../../../../assets/knight/knight2.jpg" alt="Secondary Image 1">
-          <img class="secondary-image" mat-card-image src="../../../../assets/knight/knight3.jpg" alt="Secondary Image 2">
-        </div>
-      </div>
-      <mat-card-title>Hollow Knight</mat-card-title>
-      <mat-card-subtitle>VideoJuego $12</mat-card-subtitle>
-    </mat-card-content>
-  </mat-card>
+<mat-card class="card-container" (click) = "navigateToProduct()">
+
+  <mat-card-header>
+    <mat-card-title>{{ product.name }}</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="image-container">
+      <img class="main-image" mat-card-image [src]="product.image" alt="{{ product.name }}">
+    </div>
+
+    <!-- TODO como se usa la categoria -->
+    <mat-card-title>{{ product.category.name }}</mat-card-title>
+    <div class="subtitle-container" >
+      <mat-card-subtitle>Marca: {{ product.brand }}</mat-card-subtitle> 
+      <mat-card-subtitle>Precio: ${{ product.price }}</mat-card-subtitle>
+      <p-rating [(ngModel)]= "value" [readonly]="true" [cancel]="false"/>
+    </div>
+  </mat-card-content>
+  
+</mat-card>

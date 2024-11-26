@@ -1,0 +1,155 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Product 1",
+      "price": 100,
+      "description": "This is a product",
+      "image": "https://via.placeholder.com/150",
+      "brand": "Brand 1",
+      "category": {
+        "name": "Clásicos",
+        "subcategories": [
+          {
+            "name": "Europeos",
+            "subcategories": [
+              { "name": "Años 50s", "subcategories": [] },
+              { "name": "Años 60s", "subcategories": [] },
+              { "name": "Años 70s", "subcategories": [] }
+            ]
+          },
+          {
+            "name": "Americanos",
+            "subcategories": [
+              { "name": "Muscle Cars", "subcategories": [] },
+              { "name": "Hot Rods", "subcategories": [] }
+            ]
+          }
+        ]
+      },
+      "rating": 1,
+      "createdAt": "2023-10-01T00:00:00Z",
+      "updatedAt": "2023-10-01T00:00:00Z"
+    },
+    {
+      "id": 2,
+      "name": "Product 2",
+      "price": 200,
+      "description": "This is another product",
+      "image": "https://via.placeholder.com/150",
+      "brand": "Brand 2",
+      "category": {
+      "name": "Young Timers",
+      "subcategories": [
+        {
+        "name": "Japoneses",
+        "subcategories": [
+          { "name": "Toyota Supra", "subcategories": [] },
+          { "name": "Mazda RX-7", "subcategories": [] }
+        ]
+        },
+        {
+        "name": "Europeos",
+        "subcategories": [
+          { "name": "BMW Serie 3 E30", "subcategories": [] },
+          { "name": "Mercedes-Benz 190E", "subcategories": [] }
+        ]
+        }
+      ]
+      },
+      "rating": 3,
+      "createdAt": "2023-10-01T00:00:00Z",
+      "updatedAt": "2023-10-01T00:00:00Z"
+    },
+    {
+      "id": 3,
+      "name": "Product 3",
+      "price": 300,
+      "description": "This is yet another product",
+      "image": "https://via.placeholder.com/150",
+      "brand": "Brand 3",
+      "category": {
+      "name": "Futuros Clásicos",
+      "subcategories": [
+        {
+        "name": "Deportivos",
+        "subcategories": [
+          { "name": "Nissan GT-R R35", "subcategories": [] },
+          { "name": "Porsche 911 (997)", "subcategories": [] }
+        ]
+        },
+        {
+        "name": "SUVs",
+        "subcategories": [
+          { "name": "Range Rover Evoque", "subcategories": [] },
+          { "name": "Porsche Cayenne", "subcategories": [] }
+        ]
+        }
+      ]
+      },
+      "rating": 5,
+      "createdAt": "2023-10-01T00:00:00Z",
+      "updatedAt": "2023-10-01T00:00:00Z"
+    }
+  ],
+  "categories": [
+    {
+      "name": "Clásicos",
+      "subcategories": [
+        {
+          "name": "Europeos",
+          "subcategories": [
+            { "name": "Años 50s", "subcategories": [] },
+            { "name": "Años 60s", "subcategories": [] },
+            { "name": "Años 70s", "subcategories": [] }
+          ]
+        },
+        {
+          "name": "Americanos",
+          "subcategories": [
+            { "name": "Muscle Cars", "subcategories": [] },
+            { "name": "Hot Rods", "subcategories": [] }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Young Timers",
+      "subcategories": [
+        {
+          "name": "Japoneses",
+          "subcategories": [
+            { "name": "Toyota Supra", "subcategories": [] },
+            { "name": "Mazda RX-7", "subcategories": [] }
+          ]
+        },
+        {
+          "name": "Europeos",
+          "subcategories": [
+            { "name": "BMW Serie 3 E30", "subcategories": [] },
+            { "name": "Mercedes-Benz 190E", "subcategories": [] }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Futuros Clásicos",
+      "subcategories": [
+        {
+          "name": "Deportivos",
+          "subcategories": [
+            { "name": "Nissan GT-R R35", "subcategories": [] },
+            { "name": "Porsche 911 (997)", "subcategories": [] }
+          ]
+        },
+        {
+          "name": "SUVs",
+          "subcategories": [
+            { "name": "Range Rover Evoque", "subcategories": [] },
+            { "name": "Porsche Cayenne", "subcategories": [] }
+          ]
+        }
+      ]
+    }
+  ]
+}

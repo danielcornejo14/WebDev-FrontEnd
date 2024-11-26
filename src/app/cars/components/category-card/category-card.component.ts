@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CardModule } from 'primeng/card';
+import { Category } from '../../models/products/category';
 
 
 @Component({
@@ -12,5 +13,14 @@ import { CardModule } from 'primeng/card';
   styleUrl: './category-card.component.scss'
 })
 export class CategoryCardComponent {
+    
+  @Input()
+  public category!: Category;
+
+  ngOnInit(): void {
+    if(!this.category){
+      throw new Error('Product is required');
+    }
+  }
 
 }

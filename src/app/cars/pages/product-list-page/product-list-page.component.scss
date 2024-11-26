@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  gap: 10px;
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  flex: 2
+}
+
+.content {
+  flex: 9;
+}
+
+.category-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem; /* Espacio entre cada categoría */
+}
+.category-container p-checkbox {
+  margin-right: 0.5rem; /* Espacio entre la checkbox y el label */
+}
+
+.rating-filter{
+  margin-left: 1rem;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 10px;
+  margin-left: 5px;
+  gap: 16px;
+}
+
+app-featured-card {
+  width: 100%;
+  height: auto;
+}
