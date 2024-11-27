@@ -4,6 +4,8 @@ import { Error404PageComponent } from './shared/pages/error404-page/error404-pag
 import { LandingPageComponent } from './cars/pages/landing-page/landing-page.component';
 import { ProductPageComponent } from './cars/pages/product-page/product-page.component';
 import { ProductListPageComponent } from './cars/pages/product-list-page/product-list-page.component';
+import { LoginComponent } from './auth/pages/login/login.component';
+import { RegisterComponent } from './auth/pages/register/register.component';
 
 export const routes: Routes = [
     {
@@ -16,6 +18,14 @@ export const routes: Routes = [
           { path: '**', redirectTo: 'landing' },
         ]
     },
+    {
+      path: 'login',
+      component: LoginComponent
+  },
+  {
+      path: 'register',
+      component: RegisterComponent
+  },
     {
         path: '404',
         component: Error404PageComponent,
