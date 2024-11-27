@@ -3,6 +3,7 @@ import { Injectable, Pipe } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable, map, of } from 'rxjs';
 import { Product } from '../models/products/product';
+import { Category } from '../models/products/category';
 
 @Injectable({
   providedIn: 'root',
