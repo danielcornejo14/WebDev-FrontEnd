@@ -1,0 +1,13 @@
+<div class="dashboard-cards mx-4">
+    <div class="card" *ngFor="let card of cards">
+      <div class="card-header">
+        <h3>{{ card.title }}</h3>
+        <span class="icon">{{ card.icon }}</span>
+      </div>
+      <div class="card-body">
+        <h2>{{ card.value }}</h2>
+        <p>{{ card.description }}</p>
+      </div>
+    </div>
+  </div>
+  
