@@ -11,20 +11,7 @@ import { MainComponent } from './admin/main/main.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 
 export const routes: Routes = [
-    {
-        path: 'home',
-        component: LayoutPageComponent,
-        children: [
-          { path: 'landing', component: LandingPageComponent },
-          { path: 'product-list', component: ProductListPageComponent },
-          { path: 'product-list/:id', component: ProductPageComponent },
-          { path: 'sell', component: SellPageComponent },
-          { path: '**', redirectTo: 'landing' },
-        ]
-    },
-    {
-      path: 'login',
-      component: LoginComponent
+
   {
     path: 'home',
     component: LayoutPageComponent,
