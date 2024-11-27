@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UserRole } from '../../../cars/models/users/user-role';
 
 @Component({
   selector: 'app-login',
@@ -32,18 +33,26 @@ export class LoginComponent {
 
   onSubmit() {
     this.authService.login(this.email, this.password).subscribe({
-      next: response => {
+      next: (response: UserRole)=> {
         // Verificar el rol del usuario después del login
-        const userRole = response.role; // admin, user, logistics 
-        if (userRole === 'admin') {
-          this.router.navigate(['/home']);
+         // admin, user, logistics
+        let route = '/home';
+        // TODO: create new routes
+        switch (response) {
+          case 'admin':
+            route = '/home';
+            break;
+          case 'customer':
+            route = '/home';
+            break;
+          case 'logistics':
+            route = '/home';
+            break;
+          default:
+            route = '/home';
+            break;
         }
-        if (userRole === 'user') {
-          this.router.navigate(['/home']);
-        }
-        else {
-          this.router.navigate(['/homeLogistics']); 
-        }
+        this.router.navigate([route]);
       },
       error: error => {
         this.errorMessage = 'Correo o contraseña incorrectos';

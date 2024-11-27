@@ -34,11 +34,11 @@ export class AuthService {
       map(response => {
         // Guardar el token en el localStorage
         console.log(response);
-        localStorage.setItem('token', response);
+        localStorage.setItem('token', response.jwt);
         // response.role;
         // response.email;
         // response.password;
-        return response;
+        return response.role;
       })
     );
   }
