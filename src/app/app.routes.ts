@@ -6,37 +6,53 @@ import { ProductPageComponent } from './cars/pages/product-page/product-page.com
 import { ProductListPageComponent } from './cars/pages/product-list-page/product-list-page.component';
 import { LoginComponent } from './auth/pages/login/login.component';
 import { RegisterComponent } from './auth/pages/register/register.component';
+import { MainComponent } from './admin/main/main.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
 
 export const routes: Routes = [
-    {
-        path: 'home',
-        component: LayoutPageComponent,
-        children: [
-          { path: 'landing', component: LandingPageComponent },
-          { path: 'product-list', component: ProductListPageComponent },
-          { path: 'product-list/:id', component: ProductPageComponent },	
-          { path: '**', redirectTo: 'landing' },
-        ]
-    },
-    {
-      path: 'login',
-      component: LoginComponent
+  {
+    path: 'home',
+    component: LayoutPageComponent,
+    children: [
+      { path: 'landing', component: LandingPageComponent },
+      { path: 'product-list', component: ProductListPageComponent },
+      { path: 'product-list/:id', component: ProductPageComponent },
+      { path: '**', redirectTo: 'landing' },
+    ]
   },
   {
-      path: 'register',
-      component: RegisterComponent
+    path: 'login',
+    component: LoginComponent
   },
-    {
-        path: '404',
-        component: Error404PageComponent,
+  {
+    path: 'register',
+    component: RegisterComponent
+  },
+
+  {
+    path: 'admin',
+    children: [
+      {
+        path: 'main',
+        component: MainComponent
       },
       {
-        path: '',
-        redirectTo: 'home',
-        pathMatch: 'full'
+        path: 'dashboard',
+        component: DashboardComponent
       },
-      {
-        path: '**',
-        redirectTo: '404',
-      }
+    ]
+  },
+  {
+    path: '404',
+    component: Error404PageComponent,
+  },
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
+  {
+    path: '**',
+    redirectTo: '404',
+  }
 ];

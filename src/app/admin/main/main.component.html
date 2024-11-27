@@ -1,0 +1,13 @@
+<app-dashboard class="mx-5"></app-dashboard>
+<div class="management-sections mx-5">
+    <div class="section" *ngFor="let section of sections">
+      <h3>{{ section.title }}</h3>
+      <p>{{ section.description }}</p>
+      <button class="section-btn" routerLink="{{section.link}}" routerLinkActive="active">
+        <span class="icon">{{ section.icon }}</span>
+        {{ section.buttonText }}
+
+      </button>
+    </div>
+  </div>
+  
