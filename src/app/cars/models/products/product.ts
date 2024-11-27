@@ -12,7 +12,6 @@ export interface Product {
     category: Category;
     createdAt: Date;
     updatedAt: Date;
-
 }
 
 

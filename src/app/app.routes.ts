@@ -17,6 +17,7 @@ export const routes: Routes = [
           { path: 'product-list', component: ProductListPageComponent },
           { path: 'product-list/:id', component: ProductPageComponent },
           { path: 'sell', component: SellPageComponent },
+          { path: 'modify-product/:id', component: SellPageComponent },
           { path: '**', redirectTo: 'landing' },
         ]
     },

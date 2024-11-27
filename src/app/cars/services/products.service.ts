@@ -1,6 +1,6 @@
 import { environment } from '../../../../environments/environment';
 import { Injectable, Pipe } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable, map,of } from 'rxjs';
 import { Product } from '../models/products/product';
 
@@ -11,6 +11,13 @@ export class ProductsService {
   private apiUrl = environment.baserURL;
   
   constructor(private http: HttpClient) { }
+
+  private createAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+  }
 
   getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(`${this.apiUrl}/products`);
@@ -24,28 +31,29 @@ export class ProductsService {
   }
 
   getProductsByCategory(category: string): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.apiUrl}/product/category/${category}`); //Falta en el backend
+    return this.http.get<Product[]>(`${this.apiUrl}/product/category/${category}`);
   }
 
   deleteProduct(id: number): Observable<boolean> {
-    return this.http.delete<boolean>(`${this.apiUrl}/products/deleteProduct/${id}`)
-    .pipe(
-      map(resp => true),
-      catchError(error => of(false))
-    )
+    const headers = this.createAuthHeaders();
+    return this.http.delete<boolean>(`${this.apiUrl}/product/deleteProduct/${id}`, { headers })
+      .pipe(
+        map(resp => true),
+        catchError(error => of(false))
+      );
   }
 
   updateProduct(product: Product): Observable<Product> {
-    if(!product.id){
-      throw Error ('El id del producto es necesario');
+    if (!product.id) {
+      throw Error('El id del producto es necesario');
     }
-    return this.http.patch<Product>(`${this.apiUrl}/products/updateProduct/${product.id}`, product);
+    const headers = this.createAuthHeaders();
+    return this.http.patch<Product>(`${this.apiUrl}/product/updateProduct/${product.id}`, product, { headers });
   }
 
   createProduct(product: Product): Observable<Product> {
-    return this.http.post<Product>(`${this.apiUrl}/products/createProduct`, product);
+    const headers = this.createAuthHeaders();
+    return this.http.post<Product>(`${this.apiUrl}/product/createProduct`, product, { headers });
   }
-
-
-  
+ 
 }

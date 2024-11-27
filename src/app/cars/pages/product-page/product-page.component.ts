@@ -46,6 +46,10 @@ export class ProductPageComponent {
       .subscribe(product => this.product = product);
     }
   }
+  
+  editProduct() {
+    // Implementar la lógica de redirección
+  }
 
   //TODO: Verificar Login para agregar review y carrito
 }
