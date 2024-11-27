@@ -39,3 +39,8 @@ app-featured-card {
   width: 100%;
   height: auto;
 }
+
+.p-card-body {
+  max-height: 90vh;
+  overflow-y: scroll;
+}

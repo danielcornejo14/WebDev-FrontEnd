@@ -102,12 +102,13 @@ export class ProductListPageComponent implements OnInit {
   }
 
   filterProducts(): void {
-    this.filteredProducts = this.products.filter(product => {
+    const products = this.filteredProducts = this.products.filter(product => {
+      
       const matchesPrice = product.price >= this.priceRange[0] && product.price <= this.priceRange[1];
-      //TODO: Ver como se va a trabajar el tema de las categorias en el backend
       const matchesCategory = this.selectedCategories.length === 0 || this.selectedCategories.includes(product.category.name);
       const matchesRating = product.rating <= this.selectedRating;
-      return matchesPrice && matchesCategory && matchesRating;
+      return matchesPrice && matchesCategory;
+
     });
   }
 }

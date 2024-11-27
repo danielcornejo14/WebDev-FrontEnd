@@ -40,10 +40,12 @@ export class ProductPageComponent {
 
   ngOnInit(): void {
     const productId = this.router.snapshot.paramMap.get('id');
-
     if(productId){
-      this.productService.getProductById(Number(productId))
-      .subscribe(product => this.product = product);
+      this.productService.getProductById(productId)
+      .subscribe(product => {
+        console.log(product);
+        this.product = product
+      });
     }
   }
 

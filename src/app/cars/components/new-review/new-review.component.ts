@@ -20,7 +20,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 export class NewReviewComponent {
   
   @Input()
-  productId!: number;
+  productId!: number | string;
   
   reviewRating: number = 0;
   reviewComment: string = '';
