@@ -1,19 +1,42 @@
 <div class="product-detail">
-    <div class="product-detail-container">
+  <div class="product-detail-container">
+    
+    <div class="product-main-info">
+
       <div class="product-image-container">
         <img [src]="product.image" alt="{{ product.name }}" class="product-image">
       </div>
+      
       <div class="product-info-container">
-        <h4>{{ product.name }}</h4>
+      
+        <h1>{{ product.name }}</h1>
         <p class="product-description">{{ product.description }}</p>
         <p>Price: ${{ product.price }}</p>
         <p>Brand: {{ product.brand }}</p>
         <p>Rating: <p-rating [(ngModel)]="product.rating" [readonly]="true" [cancel]="false"></p-rating></p>
-        <button pButton type="button" label="Add to Cart"></button>
-      </div>
-      <div class="product-additional-info">
-        <h5>Informacion detallada</h5>
-        <p>Here you can add more details about the product, such as specifications, features, etc.</p>
+        
+        <div>
+          <button pButton type="button" label="Add to Cart" icon="pi pi-shopping-cart" class="small-green-button"></button>
+        </div>
       </div>
     </div>
+    
+    <div class="product-additional-info">
+      <h5>Informacion detallada</h5>
+      <p>Detalles tecnicos TODO</p>
+    </div>
+    
+    <app-new-review [productId]="product.id"></app-new-review>
+    
+    <div class="reviews-list">
+      <h4>Reviews</h4>
+        <div *ngFor="let review of reviews">
+          <app-posted-review [review]="review"></app-posted-review>
+        </div>
+    </div>
+  
   </div>
+</div>
+
+
+
