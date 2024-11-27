@@ -1,20 +1,28 @@
+import { AuthService } from './../../../cars/services/auth.service';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
 
   registerForm: FormGroup;
-  showPassword: boolean = false;
+  //showPassword: boolean = false;
+  email: string = '';
+  password: string = '';
+  errorMessage: string = '';
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -23,9 +31,9 @@ export class RegisterComponent {
     });
   }
 
-  togglePassword() {
-    this.showPassword = !this.showPassword;
-  }
+  // togglePassword(): void {
+  //   this.showPassword = !this.showPassword;
+  // }
 
   isFieldInvalid(field: string): boolean {
     const control = this.registerForm.get(field);
@@ -33,13 +41,15 @@ export class RegisterComponent {
   }
 
   onSubmit() {
-    if (this.registerForm.valid) {
-      console.log('Formulario enviado', this.registerForm.value);
-      alert('¡Registro exitoso!');
-    } else {
-      this.registerForm.markAllAsTouched();
-      alert('Por favor, completa todos los campos correctamente.');
-    }
+    this.authService.register(this.email, this.password).subscribe({
+      next: response => {
+        // Redirigir al usuario a la página principal después del registro
+        this.router.navigate(['/home']);
+      },
+      error: error => {
+        this.errorMessage = 'Registration failed';
+      }
+    });
   }
 
 }
