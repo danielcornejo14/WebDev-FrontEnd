@@ -9,7 +9,7 @@ import { environment } from '../../../../environments/environment';
 })
 export class AuthService {
 
-  private apiUrl = environment.baserURL;
+  private apiUrl = environment.baserURL + "/users";
   
   constructor(private http: HttpClient) { }
 
@@ -33,7 +33,8 @@ export class AuthService {
     return this.http.post<any>(`${this.apiUrl}/login`, body, { headers }).pipe(
       map(response => {
         // Guardar el token en el localStorage
-        localStorage.setItem('token', response.token);
+        console.log(response);
+        localStorage.setItem('token', response);
         // response.role;
         // response.email;
         // response.password;

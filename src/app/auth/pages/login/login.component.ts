@@ -36,7 +36,7 @@ export class LoginComponent {
         // Verificar el rol del usuario después del login
         const userRole = response.role; // admin, user, logistics 
         if (userRole === 'admin') {
-          this.router.navigate(['/homeAdmin']);
+          this.router.navigate(['/home']);
         }
         if (userRole === 'user') {
           this.router.navigate(['/home']);

@@ -8,7 +8,7 @@ import { Product } from '../models/products/product';
   providedIn: 'root',
 })
 export class ProductsService {
-  private apiUrl = environment.baserURL;
+  private apiUrl = environment.baserURL + '/product';
   
   constructor(private http: HttpClient) { }
 
@@ -33,12 +33,12 @@ export class ProductsService {
   }
 
   getProductsByCategory(category: string): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.apiUrl}/product/category/${category}`);
+    return this.http.get<Product[]>(`${this.apiUrl}/category/${category}`);
   }
 
   deleteProduct(id: number): Observable<boolean> {
     const headers = this.createAuthHeaders();
-    return this.http.delete<boolean>(`${this.apiUrl}/product/deleteProduct/${id}`, { headers })
+    return this.http.delete<boolean>(`${this.apiUrl}/deleteProduct/${id}`, { headers })
       .pipe(
         map(resp => true),
         catchError(error => of(false))
@@ -48,20 +48,20 @@ export class ProductsService {
   updateProduct(product: Product): Observable<Product> {
     if (!product.id) {
       throw Error('El id del producto es necesario');
+    }
     if (!product.id) {
       throw Error('El id del producto es necesario');
     }
     const headers = this.createAuthHeaders();
-    return this.http.patch<Product>(`${this.apiUrl}/product/updateProduct/${product.id}`, product, { headers });
-    return this.http.patch<Product>(
-      `${this.apiUrl}/updateProduct/${product.id}`,
-      product
-    );
+    return this.http.patch<Product>(`${this.apiUrl}/updateProduct/${product.id}`, product, { headers });
+    // return this.http.patch<Product>(
+    //   `${this.apiUrl}/updateProduct/${product.id}`,
+    //   product
+    // );
   }
-
+  
   createProduct(product: Product): Observable<Product> {
     const headers = this.createAuthHeaders();
-    return this.http.post<Product>(`${this.apiUrl}/product/createProduct`, product, { headers });
+    return this.http.post<Product>(`${this.apiUrl}/createProduct`, product, { headers });
   }
- 
 }
