@@ -48,6 +48,10 @@ export class ProductPageComponent {
       });
     }
   }
+  
+  editProduct() {
+    // Implementar la lógica de redirección
+  }
 
   //TODO: Verificar Login para agregar review y carrito
 }

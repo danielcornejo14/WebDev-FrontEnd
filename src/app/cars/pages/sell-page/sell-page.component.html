@@ -1,1 +1,43 @@
-<p>sell-page works!</p>
+<div class="sell-page-container">
+  <h2>Publicar Nuevo Producto</h2>
+  <form (ngSubmit)="onSubmit()" [formGroup]="productForm">
+    
+    <div class="form-group" [ngClass]="{'has-error': isFieldInvalid('name')}">
+      <label for="name">Nombre del Producto</label>
+      <input type="text" id="name" formControlName="name" required>
+      <div *ngIf="isFieldInvalid('name')" class="error-message">Nombre es requerido</div>
+    </div>
+
+    <div class="form-group" [ngClass]="{'has-error': isFieldInvalid('brand')}">
+      <label for="brand">Marca</label>
+      <input type="text" id="brand" formControlName="brand" required>
+      <div *ngIf="isFieldInvalid('brand')" class="error-message">Marca es requerida</div>
+    </div>
+
+    <div class="form-group" [ngClass]="{'has-error': isFieldInvalid('description')}">
+      <label for="description">Descripción</label>
+      <textarea id="description" formControlName="description" required></textarea>
+      <div *ngIf="isFieldInvalid('description')" class="error-message">Descripción es requerida</div>
+    </div>
+
+    <div class="form-group" [ngClass]="{'has-error': isFieldInvalid('price')}">
+      <label for="price">Precio</label>
+      <input type="number" id="price" formControlName="price" required>
+      <div *ngIf="isFieldInvalid('price')" class="error-message">Precio es requerido y debe ser mayor o igual a 0</div>
+    </div>
+
+    <div class="form-group" [ngClass]="{'has-error': isFieldInvalid('image')}">
+      <label for="image">URL de la Imagen</label>
+      <input type="text" id="image" formControlName="image" required>
+      <div *ngIf="isFieldInvalid('image')" class="error-message">URL de la Imagen es requerida</div>
+    </div>
+
+    <div class="form-group" [ngClass]="{'has-error': isFieldInvalid('category')}">
+      <label for="category">Categoría</label>
+      <input type="text" id="category" formControlName="category" required>
+      <div *ngIf="isFieldInvalid('category')" class="error-message">Categoría es requerida</div>
+    </div>
+
+    <button type="submit" class="submit-button">Publicar Producto</button>
+  </form>
+</div>
