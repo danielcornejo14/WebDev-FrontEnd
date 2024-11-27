@@ -16,7 +16,6 @@ export class ProductsService {
     return this.http.get<Product[]>(`${this.apiUrl}/products`);
   }
 
-
   getProductById(id: number): Observable<Product> {
     if(!id){
       throw Error ('El id del producto es necesario');

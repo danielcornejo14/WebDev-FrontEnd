@@ -6,7 +6,9 @@ import { RatingModule } from 'primeng/rating';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
-import { PrimeIcons } from 'primeng/api';
+import { NewReviewComponent } from "../../components/new-review/new-review.component";
+import { PostedReviewComponent } from '../../components/posted-review/posted-review.component';
+
 
 @Component({
   selector: 'app-product-page',
@@ -16,12 +18,20 @@ import { PrimeIcons } from 'primeng/api';
     CommonModule,
     FormsModule,
     ButtonModule,
-  ],
+    NewReviewComponent,
+    PostedReviewComponent
+],
   templateUrl: './product-page.component.html',
   styleUrl: './product-page.component.scss'
 })
 export class ProductPageComponent {
   product!: Product;
+
+  reviews = [
+    { rating: 5, comment: 'Great product!', user: 'User1' },
+    { rating: 4, comment: 'Very good, but could be improved.', user: 'User2' },
+    { rating: 3, comment: 'Average product.', user: 'User3' },
+  ];
 
   constructor(
     private router: ActivatedRoute,
@@ -36,4 +46,6 @@ export class ProductPageComponent {
       .subscribe(product => this.product = product);
     }
   }
+
+  //TODO: Verificar Login para agregar review y carrito
 }

@@ -1,0 +1,5 @@
+<div class="posted-review">
+    <h5>{{ review.user }}</h5>
+    <p-rating [(ngModel)]="review.rating" [readonly]="true" [cancel]="false"></p-rating>
+    <p>{{ review.comment }}</p>
+</div>
