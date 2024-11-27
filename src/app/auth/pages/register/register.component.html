@@ -1,8 +1,14 @@
 <div class="container">
     <div class="form-header">
       <img src="image.png" alt="Logo" class="logo">
+      <div  class="">
+        <button class="close-register" routerLink="/home" routerLinkActive="active">Volver</button>
+      </div>
+      
+
       <h1>Crea tu cuenta</h1>
       <p>O <a routerLink="/login" routerLinkActive="router-link-active">inicia sesión</a> si ya tienes una cuenta</p>
+      
     
     <form id="registerForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
@@ -11,18 +17,18 @@
       </div>
       <div class="form-group">
         <label for="email">Correo electrónico</label>
-        <input type="email" id="email" name="email" placeholder="Ingresa tu correo electrónico" required>
+        <input type="email" id="email" [(ngModel)]="email" name="email" placeholder="Ingresa tu correo electrónico" required>
       </div>
       <div class="form-group">
         <label for="password">Contraseña</label>
         <div class="password-container d-flex justify-contend-between">
-          <input type="password" id="password" name="password" placeholder="Crea una contraseña" required>
+          <input type="password" id="password" [(ngModel)]="password" name="password" placeholder="Crea una contraseña" required>
         </div>
       </div>
       <div class="form-group">
         <label for="password">Confirmar contraseña</label>
         <div class="password-container d-flex justify-contend-between">
-          <input type="password" id="password" name="password" placeholder="Crea una contraseña" required>
+          <input type="password" id="password" [(ngModel)]="password" name="password" placeholder="Crea una contraseña" required>
         </div>
       </div>
       <div class="form-options">

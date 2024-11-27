@@ -1,18 +1,21 @@
 <div class="login-container">
     <div class="login-card">
       <img src="https://tusitioweb.com/wp-admin/images/logo-sitioweb.png" alt="logo" class="logo" />
+      <div  class="">
+        <button class="close-register btn-outline-secondary" routerLink="/home" routerLinkActive="active">Volver</button>
+      </div>
       <h2>Inicia sesión en tu cuenta</h2>
       <p class="register-link">O <a routerLink="/register" routerLinkActive="router-link-active">regístrate</a> si aún no tienes una cuenta</p>
   
-      <form (ngSubmit)="onSubmit()">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="email" style="display: block;">Correo electrónico </label>
-            <input type="email" id="email" formControlName="email" placeholder="Ingresa tu correo electrónico" required/>
+            <input type="email" id="email" [(ngModel)] = "email" formControlName="email" placeholder="Ingresa tu correo electrónico" required/>
           </div>
     
           <div class="form-group">
             <label for="password">Contraseña</label>
-            <input type="password" id="password" formControlName="password" placeholder="Ingresa tu constraseña" required/>
+            <input type="password" id="password" [(ngModel)]="password" formControlName="password" placeholder="Ingresa tu constraseña" required/>
           </div>
     
           <div class="form-options">
@@ -23,7 +26,7 @@
             <a href="/forgot-password">¿Olvidaste tu contraseña?</a>
           </div>
     
-          <button type="submit" class="login-button" [disabled]="!loginForm.valid">Iniciar sesión</button>
+          <button type="submit" class="login-button">Iniciar sesión</button>
     
   
         <div class="social-login">
@@ -37,6 +40,7 @@
           </button>
         </div>
       </form>
+      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
     </div>
   </div>
   
