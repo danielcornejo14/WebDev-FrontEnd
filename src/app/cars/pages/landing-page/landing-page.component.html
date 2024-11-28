@@ -1,7 +1,7 @@
 <br>
 
 <h2 style="margin-left: 20px;">Tendencias</h2>
-<p-carousel [value]="products" [numVisible]="numVisible" [numScroll]="1" [circular]="true" [autoplayInterval]="10000">
+<p-carousel [value]="products" [numVisible]="numVisible" [numScroll]="3" [circular]="true" [autoplayInterval]="10000">
   <ng-template pTemplate="item" let-item>
     <div class="carousel-item">
       <app-featured-card [product]="item"></app-featured-card>
@@ -14,7 +14,7 @@
 
 <br>
 <h2 style="margin-left: 20px;">Descuentos</h2>
-<p-carousel [value]="products" [numVisible]="numVisible" [numScroll]="1" [circular]="true" [autoplayInterval]="10000">
+<p-carousel [value]="products" [numVisible]="numVisible" [numScroll]="3" [circular]="true" [autoplayInterval]="10000">
   <ng-template pTemplate="item" let-item>
     <div class="carousel-item">
       <app-discount-card [product]="item"></app-discount-card>

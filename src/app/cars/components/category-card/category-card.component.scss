@@ -1,18 +1,13 @@
 .card-container {
     display: flex;
     justify-content: center;
-  }
+    align-items: center;
+}
   
-  .category-card {
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .category-card:hover {
-    transform: scale(1.05);
-  }
-  
-  .card-image {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-  }
+.category-card {
+  transition: transform 0.3s ease-in-out;
+}
+
+.category-card:hover {
+  transform: scale(1.05);
+}

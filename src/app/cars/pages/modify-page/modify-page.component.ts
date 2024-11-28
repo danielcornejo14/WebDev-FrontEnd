@@ -1,10 +1,14 @@
 import { Component, Input } from '@angular/core';
 import { Product } from '../../models/products/product';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule,FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ProductsService } from '../../services/products.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Category } from '../../models/products/category';
+import { CategoriesService } from '../../services/categories.service';
+import { ActivatedRoute } from '@angular/router';
+import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-modify-page',
@@ -18,20 +22,25 @@ import { Category } from '../../models/products/category';
 })
 export class ModifyPageComponent {
   
-  @Input() 
-  product!: Product;
+  
+  product: Product = {} as Product;
   categories: Category[] = [];
   productForm: FormGroup;
 
   ngOnInit(): void {
-    loadCategories();
+    this.loadCategories();
+    this.getProduct();
   }
 
   constructor(
     private fb: FormBuilder,
-    private productsService: ProductsService,
-    private router: Router
-  ) {
+    private productService: ProductsService,
+    private router: Router,
+    private activeRouter: ActivatedRoute,
+    private categoriesService: CategoriesService,
+    public dialog: MatDialog
+  ) 
+{
       this.productForm = this.fb.group({
       name: ['', Validators.required],
       brand: ['', Validators.required],
@@ -42,6 +51,25 @@ export class ModifyPageComponent {
     });
   }
 
+  getProduct(): void {
+    const productId = this.activeRouter.snapshot.paramMap.get('id');
+    if (productId) {
+      this.productService.getProductById(productId).subscribe(product => {
+        this.product = product;
+        const selectedCategory = this.categories.find(category => category.id === product.category.id);
+        this.productForm.patchValue({
+          name: product.name,
+          brand: product.brand,
+          description: product.description,
+          price: product.price,
+          image: product.image,
+          category: selectedCategory
+        });
+      });
+    }
+  }
+
+  
   isFieldInvalid(field: string): boolean {
     const control = this.productForm.get(field);
     return control ? control.invalid && control.touched : false;
@@ -50,7 +78,6 @@ export class ModifyPageComponent {
   loadCategories(): void {
     this.categoriesService.getCategories().subscribe(categories => {
       this.categories = categories;
-      console.log(categories);
     });
   }
 
@@ -63,20 +90,40 @@ export class ModifyPageComponent {
     });
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.productForm.valid) {
-      const newProduct = this.productForm.value;
-      this.productsService.updateProduct(newProduct).subscribe({
-        next: () => this.router.navigate(['/home']),
-        error: (err) => console.error('Error al crear el producto', err)
+      const updatedProduct = { ...this.product, ...this.productForm.value };
+      console.log('Producto actualizado', updatedProduct); 
+      this.productService.updateProduct(updatedProduct).subscribe({
+        next: (product) => {
+          this.router.navigate(['/home'])
+        },
+        error: (err) => console.error('Error al Actualizar el producto', err)
       });
 
-      console.log(this.productForm.value);
-    } else {
+    } 
+    else {
       this.productForm.markAllAsTouched();
       this.clearInvalidFields();
       console.log('Formulario inválido');
     }
   }
 
+  onDelete(): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        if (this.product) {
+          this.productService.deleteProduct(this.product.id).subscribe({
+            next: () => {
+              console.log('Producto eliminado');
+              this.router.navigate(['/home']);
+            },
+            error: (err) => console.error('Error al eliminar el producto', err)
+          });
+        }
+      }
+    });
+  }
 }

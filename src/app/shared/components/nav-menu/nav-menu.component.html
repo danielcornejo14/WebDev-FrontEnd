@@ -2,19 +2,20 @@
     <mat-sidenav #sidenav mode="over" class="mobile-sidenav">
 
       <mat-nav-list>
-        <a mat-list-item routerLink="/home/product-list">Cart</a>
-        <a mat-list-item routerLink="/home/product-list">Productos</a>
-        <a mat-list-item routerLink="/sell">Vender</a>
-        <a mat-list-item routerLink="/register">Registrarse</a>
+        <button mat-button class="button-text" routerLink="product-list" (click)="sidenav.close()">Productos</button>
+        <button *ngIf="!isLoggedIn" mat-button class="button-text" routerLink="/register" (click)="sidenav.close()">Registrarse</button>
+        <button *ngIf="isLoggedIn && userRole === 'user'" mat-button class="button-text" routerLink="cart" (click)="sidenav.close()">Cart</button>
+        <button *ngIf="isLoggedIn && userRole === 'admin'" mat-button class="button-text" routerLink="sell" (click)="sidenav.close()">Vender</button>
+        <button *ngIf="isLoggedIn" mat-button class="button-text" (click)="logout(); sidenav.close()">Logout</button>
+        <button *ngIf="!isLoggedIn" mat-button class="button-text" routerLink="/login" (click)="sidenav.close()">Login</button>
       </mat-nav-list>
-
     </mat-sidenav>
 
     <mat-sidenav-content>
       <mat-toolbar class="tool-backgorund" color="primary">
         <div class="brand-container" routerLink="/home">
-          <span>Car</span>
-          <span class="red-text">Auto</span>
+          <span>Nex</span>
+          <span class="red-text">Cart</span>
         </div>
         <div class="search-container">
           <app-search-box></app-search-box>
@@ -24,11 +25,11 @@
 
         <div class="button-row">
           <button mat-button class="button-text" routerLink="product-list">Productos</button>
-          <button mat-button class="button-text" routerLink="sell">Vender</button>
-          <button mat-button class="button-text" routerLink="product-list">Cart</button>
-          <button mat-button class="button-text" routerLink="/login">Login</button>
-          <button mat-button class="button-text" routerLink="/register">Registrarse</button>
-          <button mat-button class="button-text" routerLink="admin/main">admin</button>
+          <button *ngIf="!isLoggedIn" mat-button class="button-text" routerLink="/register">Registrarse</button>
+          <button *ngIf="isLoggedIn && userRole === 'user'" mat-button class="button-text" routerLink="cart">Cart</button>
+          <button *ngIf="isLoggedIn && userRole === 'admin'" mat-button class="button-text" routerLink="sell">Vender</button>
+          <button *ngIf="isLoggedIn" mat-button class="button-text" (click)="logout()">Logout</button>
+          <button *ngIf="!isLoggedIn" mat-button class="button-text" routerLink="/login">Login</button>
         </div>
 
         <button mat-icon-button class="mobile-menu-button" (click)="sidenav.toggle()">

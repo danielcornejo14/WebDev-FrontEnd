@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { NewReviewComponent } from "../../components/new-review/new-review.component";
 import { PostedReviewComponent } from '../../components/posted-review/posted-review.component';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-page',
@@ -20,6 +20,7 @@ import { PostedReviewComponent } from '../../components/posted-review/posted-rev
     ButtonModule,
     NewReviewComponent,
     PostedReviewComponent
+    
 ],
   templateUrl: './product-page.component.html',
   styleUrl: './product-page.component.scss'
@@ -35,6 +36,7 @@ export class ProductPageComponent {
 
   constructor(
     private router: ActivatedRoute,
+    private routerLink: Router,
     private productService: ProductsService,
   ){}
 
@@ -48,9 +50,9 @@ export class ProductPageComponent {
       });
     }
   }
-  
-  editProduct() {
-    // Implementar la lógica de redirección
+
+  editProduct(){
+    this.routerLink.navigate(['/home/modify-product', this.product.id]);
   }
 
   //TODO: Verificar Login para agregar review y carrito

@@ -37,7 +37,7 @@ export class ProductsService {
     return this.http.get<Product[]>(`${this.apiUrl}/category/${category}`);
   }
 
-  deleteProduct(id: number): Observable<boolean> {
+  deleteProduct(id: number|string ): Observable<boolean> {
     const headers = this.createAuthHeaders();
     return this.http.delete<boolean>(`${this.apiUrl}/deleteProduct/${id}`, { headers })
       .pipe(
@@ -47,18 +47,17 @@ export class ProductsService {
   }
 
   updateProduct(product: Product): Observable<Product> {
+    console.log('PreRquest');
+    console.log(product);
     if (!product.id) {
       throw Error('El id del producto es necesario');
     }
-    if (!product.id) {
-      throw Error('El id del producto es necesario');
-    }
+ 
     const headers = this.createAuthHeaders();
-    return this.http.patch<Product>(`${this.apiUrl}/updateProduct/${product.id}`, product, { headers });
-    // return this.http.patch<Product>(
-    //   `${this.apiUrl}/updateProduct/${product.id}`,
-    //   product
-    // );
+    return this.http.patch<Product>
+      (`${this.apiUrl}/updateProduct/${product.id}`,
+       product, 
+       { headers });
   }
   
   createProduct(product: Product): Observable<Product> {
