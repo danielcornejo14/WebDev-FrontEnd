@@ -17,7 +17,7 @@ export class AuthService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const body = { email, password };
 
-    return this.http.post<any>(`${this.apiUrl}/register`, body, { headers }).pipe(
+    return this.http.post<any>(`${this.apiUrl}/signup`, body, { headers }).pipe(
       map(response => {
         // Guardar el token en el localStorage
         localStorage.setItem('token', response.token);

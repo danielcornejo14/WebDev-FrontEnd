@@ -34,7 +34,7 @@ export class SellPageComponent {
       description: ['', Validators.required],
       price: ['', [Validators.required, Validators.min(0)]],
       image: ['', Validators.required],
-      category: ['', Validators.required]
+      category: [null, Validators.required]
     });
   }
 
@@ -66,7 +66,7 @@ export class SellPageComponent {
   onSubmit() {
     if (this.productForm.valid) {
       const newProduct = this.productForm.value;
-      this.productsService.createProduct(newProduct).subscribe({
+          this.productsService.createProduct(newProduct).subscribe({
         next: () => this.router.navigate(['/home']),
         error: (err) => console.error('Error al crear el producto', err)
       });

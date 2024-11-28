@@ -29,7 +29,7 @@
     <div class="form-group" [ngClass]="{'has-error': isFieldInvalid('category')}">
       <label for="category">Categoría</label>
       <select id="category" formControlName="category" required>
-        <option *ngFor="let category of categories" [value]="category.name">{{ category.name }}</option>
+        <option *ngFor="let category of categories" [ngValue]="category">{{ category.name }}</option>
       </select>
       <div *ngIf="isFieldInvalid('category')" class="error-message">Categoría es requerida</div>
     </div>

@@ -71,6 +71,7 @@ export class ProductListPageComponent implements OnInit {
   
   loadCategories(): void {
     this.categoryService.getCategories().subscribe(categories => {
+      console.log(categories);
       this.categories = categories.map(category => ({
         ...category,
         selected: false
