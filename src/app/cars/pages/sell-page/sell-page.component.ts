@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, FormBuilder, FormGroup, Validators,ReactiveFormsModule } from '@angular/forms';
+import { CategoriesService } from '../../services/categories.service';
 import { ProductsService } from '../../services/products.service';
 import { Router } from '@angular/router';
+import { Category } from '../../models/products/category';
 
 
 @Component({
@@ -10,18 +12,21 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    
   ],
   templateUrl: './sell-page.component.html',
   styleUrl: './sell-page.component.scss'
 })
 export class SellPageComponent {
   productForm: FormGroup;
+  categories: Category[] = [];
 
   constructor(
     private fb: FormBuilder,
     private productsService: ProductsService,
-    private router: Router
+    private router: Router,
+    private categoriesService: CategoriesService
   ) {
       this.productForm = this.fb.group({
       name: ['', Validators.required],
@@ -30,6 +35,17 @@ export class SellPageComponent {
       price: ['', [Validators.required, Validators.min(0)]],
       image: ['', Validators.required],
       category: ['', Validators.required]
+    });
+  }
+
+  ngOnInit(): void {
+    this.loadCategories();
+  }
+  
+  loadCategories(): void {
+    this.categoriesService.getCategories().subscribe(categories => {
+      this.categories = categories;
+      console.log(categories);
     });
   }
 
