@@ -1,100 +1,51 @@
-.product-detail {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+.sell-page-container {
+    max-width: 600px;
+    margin: 0 auto;
     padding: 2rem;
-    background-color: #f5f5f5;
-  }
-  
-  .product-detail-container {
-    display: flex;
-    flex-direction: column;
-    max-width: 1200px;
-    width: 100%;
+    margin-top: 2rem;
     background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
-  .product-main-info {
-    display: flex;
-    width: 100%;
-  }
-  
-  .product-image-container {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f5f5f5;
-  }
-  
-  .product-image {
-    width: 100%;
-    max-width: 600px;
-    height: auto;
-    object-fit: cover;
-  }
-  
-  .product-info-container {
-    flex: 2;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-  }
-  
-  .product-info-container h1 {
+  .form-group {
     margin-bottom: 1rem;
   }
   
-  .product-info-container p {
+  .form-group label {
+    display: block;
     margin-bottom: 0.5rem;
   }
   
-  .product-description {
-    max-width: 600px;
-    word-wrap: break-word;
-  }
-  
-  .product-additional-info {
+  .form-group input,
+  .form-group textarea {
     width: 100%;
-    padding: 2rem;
-    background-color: #f9f9f9;
-    border-top: 1px solid #ddd;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
   }
   
-  .product-additional-info h5 {
-    margin-bottom: 1rem;
+  .has-error input,
+  .has-error textarea {
+    border-color: red;
   }
   
-  .product-additional-info p {
-    margin-bottom: 0.5rem;
+  .error-message {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
   }
   
-  .reviews-list {
-    width: 100%;
-    padding: 2rem;
-    background-color: #f9f9f9;
-    border-top: 1px solid #ddd;
-  }
-  
-  .reviews-list h4 {
-    margin-bottom: 1rem;
-  }
-  
-  .small-green-button {
+  .submit-button {
     padding: 0.5rem 1rem; 
     font-size: 0.875rem;
     background-color: #4CAF50;
     border: none;
     color: white;
     border-radius: 4px;
-    margin-bottom: 1rem;
     cursor: pointer;
   }
   
-  .small-green-button:hover {
+  .submit-button:hover {
     background-color: #45a049;
   }

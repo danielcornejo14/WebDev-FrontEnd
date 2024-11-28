@@ -1,5 +1,5 @@
 <div class="sell-page-container">
-    <h2>Publicar Nuevo Producto</h2>
+    <h2>Modificar un Producto</h2>
     <form (ngSubmit)="onSubmit()" [formGroup]="productForm">
       
       <div class="form-group" [ngClass]="{'has-error': isFieldInvalid('name')}">
@@ -34,10 +34,13 @@
   
       <div class="form-group" [ngClass]="{'has-error': isFieldInvalid('category')}">
         <label for="category">Categoría</label>
-        <input type="text" id="category" formControlName="category" required>
+        <select id="category" formControlName="category" required>
+          <option *ngFor="let category of categories" [ngValue]="category">{{ category.name }}</option>
+        </select>
         <div *ngIf="isFieldInvalid('category')" class="error-message">Categoría es requerida</div>
       </div>
   
       <button type="submit" class="submit-button">Publicar Producto</button>
+
     </form>
   </div>

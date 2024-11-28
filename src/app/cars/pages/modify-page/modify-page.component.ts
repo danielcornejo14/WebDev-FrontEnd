@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { ProductsService } from '../../services/products.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Category } from '../../models/products/category';
 
 @Component({
   selector: 'app-modify-page',
@@ -19,8 +20,12 @@ export class ModifyPageComponent {
   
   @Input() 
   product!: Product;
-
+  categories: Category[] = [];
   productForm: FormGroup;
+
+  ngOnInit(): void {
+    loadCategories();
+  }
 
   constructor(
     private fb: FormBuilder,
@@ -28,7 +33,7 @@ export class ModifyPageComponent {
     private router: Router
   ) {
       this.productForm = this.fb.group({
-      name: ['HOLA', Validators.required],
+      name: ['', Validators.required],
       brand: ['', Validators.required],
       description: ['', Validators.required],
       price: ['', [Validators.required, Validators.min(0)]],
@@ -40,6 +45,13 @@ export class ModifyPageComponent {
   isFieldInvalid(field: string): boolean {
     const control = this.productForm.get(field);
     return control ? control.invalid && control.touched : false;
+  }
+
+  loadCategories(): void {
+    this.categoriesService.getCategories().subscribe(categories => {
+      this.categories = categories;
+      console.log(categories);
+    });
   }
 
   clearInvalidFields() {

@@ -41,7 +41,7 @@ export class SellPageComponent {
   ngOnInit(): void {
     this.loadCategories();
   }
-  
+
   loadCategories(): void {
     this.categoriesService.getCategories().subscribe(categories => {
       this.categories = categories;
