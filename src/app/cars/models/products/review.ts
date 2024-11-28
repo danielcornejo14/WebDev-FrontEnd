@@ -1,5 +1,5 @@
-interface Review {
-    product: string; // ObjectId as string
+export interface Review {
+    productId: string | number; // ObjectId as string
     user: string; // ObjectId as string
     rating: number;
     comment?: string;

@@ -1,6 +1,6 @@
 <div class="product-review">
     <h5>Deja una review</h5>
-    <form>
+    <form (ngSubmit)="submitReview()">
       <div class="review-rating">
         <label for="reviewRating">Rating: </label>
         <p-rating [(ngModel)]="reviewRating" [cancel]="false" name="reviewRating"></p-rating>
@@ -10,10 +10,11 @@
         <textarea 
             rows="5"
             pInputTextarea 
+            [(ngModel)]="reviewComment"
+            name="reviewComment"
             [autoResize]="true">
         </textarea>
       </div>
       <button pButton type="submit" label="Submit Review" class="small-green-button"></button>
-      
     </form>
   </div>

@@ -1,5 +1,5 @@
 import { SliderModule } from 'primeng/slider';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductsService } from '../../services/products.service';
@@ -10,6 +10,7 @@ import { FeaturedCardComponent } from '../../components/featured-card/featured-c
 import { CategoriesService } from '../../services/categories.service';
 import { CheckboxModule } from 'primeng/checkbox';
 import { RatingModule } from 'primeng/rating';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-list-page',
@@ -26,9 +27,7 @@ import { RatingModule } from 'primeng/rating';
   templateUrl: './product-list-page.component.html',
   styleUrls: ['./product-list-page.component.scss']
 })
-
-export class ProductListPageComponent implements OnInit {
-  
+export class ProductListPageComponent implements OnInit, AfterViewInit {
   products: Product[] = [];
   filteredProducts: Product[] = [];
   priceRange: number[] = [0, 1000];
@@ -40,47 +39,69 @@ export class ProductListPageComponent implements OnInit {
   //TODO:Implementar Brands Filtering
   brands: string[] = [];
   selectedBrands: string[] = [];
-  
 
+  constructor(
+    private productsService: ProductsService,
+    private categoryService: CategoriesService,
+    private router: Router,
+    private activeRoute: ActivatedRoute,
+    private cdr: ChangeDetectorRef
+  ) {}
 
-  constructor(private productsService: ProductsService, private categoryService: CategoriesService) {}
-
-  
   getMaxPrice(): number {
-    return Math.ceil(Math.max(...this.products.map(product => product.price))) ;
+    return Math.ceil(Math.max(...this.products.map(product => product.price)));
   }
-
-// Cargar productos y categorias
 
   ngOnInit(): void {
     this.loadProducts();
     this.loadCategories();
+    this.activeRoute.queryParams.subscribe(params => {
+      const categoryName = params['category'];
+      if (categoryName) {
+        this.selectCategory(categoryName);
+      }
+    });
+  }
+
+  ngAfterViewInit(): void {
+    this.cdr.detectChanges();
   }
 
   loadProducts(): void {
     this.productsService.getProducts().subscribe(products => {
-      //Cargar Productos
       this.products = products;
       this.filteredProducts = products;
-      //Obtener el precio maximo
-      this.maxPrice = this.getMaxPrice()+1000;
-      //Ajustar el rango del slider para que inicie de minimo a maximo
+      this.maxPrice = this.getMaxPrice() + 1000;
       this.priceRange = [0, this.maxPrice];
+      this.filterProducts(); // Filtrar productos después de cargar
     });
   }
-  
+
   loadCategories(): void {
     this.categoryService.getCategories().subscribe(categories => {
-      console.log(categories);
       this.categories = categories.map(category => ({
         ...category,
         selected: false
       }));
+      this.activeRoute.queryParams.subscribe(params => {
+        const categoryName = params['category'];
+        if (categoryName) {
+          this.selectCategory(categoryName);
+        }
+      });
     });
   }
 
-
-// Opciones de filtros
+  selectCategory(categoryName: string): void {
+    const category = this.categories.find(cat => cat.name === categoryName);
+    if (category) {
+      category.selected = true;
+      if (!this.selectedCategories.includes(category.name)) {
+        this.selectedCategories.push(category.name);
+      }
+    }
+    this.filterProducts();
+  }
 
   onPriceChange(event: any): void {
     this.filterProducts();
@@ -103,13 +124,11 @@ export class ProductListPageComponent implements OnInit {
   }
 
   filterProducts(): void {
-    const products = this.filteredProducts = this.products.filter(product => {
-      
+    this.filteredProducts = this.products.filter(product => {
       const matchesPrice = product.price >= this.priceRange[0] && product.price <= this.priceRange[1];
       const matchesCategory = this.selectedCategories.length === 0 || this.selectedCategories.includes(product.category.name);
       const matchesRating = product.rating <= this.selectedRating;
-      return matchesPrice && matchesCategory;
-
+      return matchesPrice && matchesCategory && matchesRating;
     });
   }
 }

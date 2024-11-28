@@ -29,7 +29,7 @@
 <br>
 <h2 style="margin-left: 20px;">Categorias</h2>
 <div class="category-cards">
-  <app-category-card *ngFor="let item of categories" [category]="item"></app-category-card>
+  <app-category-card *ngFor="let item of categories" [category]="item" (categorySelected)="onCategorySelected($event)"></app-category-card>
 </div>
 
 <br>

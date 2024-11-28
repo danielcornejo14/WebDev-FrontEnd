@@ -1,5 +1,4 @@
 <mat-card class="card-container" (click) = "navigateToProduct()">
-
   <mat-card-header>
     <mat-card-title>{{ product.name }}</mat-card-title>
   </mat-card-header>
@@ -9,7 +8,6 @@
       <img class="main-image" mat-card-image [src]="product.image" alt="{{ product.name }}">
     </div>
 
-    <!-- TODO como se usa la categoria -->
     <mat-card-title>{{ product.category.name }}</mat-card-title>
     <div class="subtitle-container" >
       <mat-card-subtitle>Marca: {{ product.brand }}</mat-card-subtitle> 

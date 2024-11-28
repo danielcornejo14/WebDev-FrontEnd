@@ -2,12 +2,12 @@
     <mat-sidenav #sidenav mode="over" class="mobile-sidenav">
 
       <mat-nav-list>
-        <button mat-button class="button-text" routerLink="product-list" (click)="sidenav.close()">Productos</button>
-        <button *ngIf="!isLoggedIn" mat-button class="button-text" routerLink="/register" (click)="sidenav.close()">Registrarse</button>
-        <button *ngIf="isLoggedIn && userRole === 'user'" mat-button class="button-text" routerLink="cart" (click)="sidenav.close()">Cart</button>
-        <button *ngIf="isLoggedIn && userRole === 'admin'" mat-button class="button-text" routerLink="sell" (click)="sidenav.close()">Vender</button>
-        <button *ngIf="isLoggedIn" mat-button class="button-text" (click)="logout(); sidenav.close()">Logout</button>
-        <button *ngIf="!isLoggedIn" mat-button class="button-text" routerLink="/login" (click)="sidenav.close()">Login</button>
+        <mat-list-item routerLink="product-list" (click)="sidenav.close()">Productos</mat-list-item>
+        <mat-list-item *ngIf="!isLoggedIn" routerLink="/register" (click)="sidenav.close()">Registrarse</mat-list-item>
+        <mat-list-item *ngIf="isLoggedIn && userRole === 'user'" routerLink="cart" (click)="sidenav.close()">Cart</mat-list-item>
+        <mat-list-item *ngIf="isLoggedIn && userRole === 'admin'" routerLink="sell" (click)="sidenav.close()">Vender</mat-list-item>
+        <mat-list-item *ngIf="isLoggedIn" (click)="logout(); sidenav.close()">Logout</mat-list-item>
+        <mat-list-item *ngIf="!isLoggedIn" routerLink="/login" (click)="sidenav.close()">Login</mat-list-item>
       </mat-nav-list>
     </mat-sidenav>
 

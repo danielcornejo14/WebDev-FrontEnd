@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { Category } from '../../models/products/category';
 
@@ -17,10 +17,17 @@ export class CategoryCardComponent {
   @Input()
   public category!: Category;
 
+  @Output()
+  public categorySelected = new EventEmitter<Category>();
+
   ngOnInit(): void {
     if(!this.category){
       throw new Error('Product is required');
     }
+  }
+
+  onCardClick(): void {
+    this.categorySelected.emit(this.category);
   }
 
 }

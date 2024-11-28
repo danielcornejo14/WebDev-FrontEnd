@@ -9,6 +9,7 @@ import { CategoriesService } from '../../services/categories.service';
 import { Category } from '../../models/products/category';
 import { ButtonModule } from 'primeng/button';
 import { DiscountCardComponent } from "../../components/discount-card/discount-card.component";
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -25,14 +26,16 @@ import { DiscountCardComponent } from "../../components/discount-card/discount-c
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.scss'
 })
-export class LandingPageComponent {
+export class LandingPageComponent implements OnInit {
   public products: Product[] = [];
   public categories: Category[] = [];
   public numVisible: number = 3;
 
   constructor(
     private productsService: ProductsService, 
-    private categoriesService: CategoriesService) { }
+    private categoriesService: CategoriesService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.loadProducts();
@@ -48,8 +51,11 @@ export class LandingPageComponent {
   loadCategories(): void {
     this.categoriesService.getCategories().subscribe(categories => {
       this.categories = categories;
-      console.log(categories);
     });
+  }
+
+  onCategorySelected(category: Category): void {
+    this.router.navigate(['/home/product-list'], { queryParams: { category: category.name } });
   }
 
   @HostListener('window:resize', ['$event'])

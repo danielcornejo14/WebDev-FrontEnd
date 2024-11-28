@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { SearchBoxComponent } from "../search-box/search-box.component";
 import { AuthService } from './../../../cars/services/auth.service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-menu',
@@ -26,11 +27,14 @@ import { CommonModule } from '@angular/common';
   styleUrl: './nav-menu.component.scss'
 })
 export class NavMenuComponent {
-
   isLoggedIn: boolean = false;
   userRole: string | null = null;
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private routerLink: Router
+  ) { }
+
 
   ngOnInit(): void {
     this.isLoggedIn = this.authService.isLoggedIn();
@@ -44,6 +48,8 @@ export class NavMenuComponent {
     this.authService.logout();
     this.isLoggedIn = false;
     this.userRole = null;
+    this.routerLink.navigate(['/home/landing']);
+    
   }
 
 }

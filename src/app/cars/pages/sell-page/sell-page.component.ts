@@ -45,7 +45,6 @@ export class SellPageComponent {
   loadCategories(): void {
     this.categoriesService.getCategories().subscribe(categories => {
       this.categories = categories;
-      console.log(categories);
     });
   }
 
