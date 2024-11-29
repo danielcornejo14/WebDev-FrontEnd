@@ -1,9 +1,13 @@
+<div class="modal-overlay">
 <div class="product-form">
     <h2>{{ product ? 'Editar Producto' : 'Agregar Producto' }}</h2>
     <form (ngSubmit)="submitForm()">
       <label>Nombre:</label>
       <input type="text" [(ngModel)]="product.name" name="nombre" required />
-  
+      
+      <label>Descrición:</label>
+      <input type="text" [(ngModel)]="product.description" name="marca" required />
+
       <label>Categoría:</label>
       <input type="text" [(ngModel)]="product.category" name="categoria" required />
   
@@ -11,6 +15,9 @@
       <input type="text" [(ngModel)]="product.brand" name="marca" required />
   
       <label>Precio:</label>
+      <input type="number" [(ngModel)]="product.price" name="precio" required />
+
+      <label>Descuento:</label>
       <input type="number" [(ngModel)]="product.price" name="precio" required />
   
       <label>Imagen:</label>
@@ -22,4 +29,4 @@
       </div>
     </form>
   </div>
-  
+</div>

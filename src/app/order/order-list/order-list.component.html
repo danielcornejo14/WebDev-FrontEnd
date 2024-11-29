@@ -1,0 +1,29 @@
+<table>
+    <thead>
+      <tr>
+        <th>ID Pedido</th>
+        <th>Cliente</th>
+        <th>Fecha</th>
+        <th>Método de pago</th>
+        <th>Total</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <td>{{ order._id }}</td>
+        <td>{{ order.userId }}</td>
+        <td>{{order.createdAt}}</td>
+        <td>{{ order.paymentMethod}}</td>
+        <td>${{ order.total }}</td>
+        <td>
+          <!-- <app-order-status [status]="order.status"></app-order-status> -->
+          {{order.status}}
+        </td>
+        <td>
+          <app-order-actions [order]="order"></app-order-actions>
+        </td>
+      </tr>
+    </tbody>
+  </table>

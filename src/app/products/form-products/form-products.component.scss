@@ -1,0 +1,91 @@
+/* Estilos para el modal */
+.modal-overlay {
+    position: fixed; /* Se fija en la pantalla */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Ocupa todo el ancho de la ventana */
+    height: 100vh; /* Ocupa todo el alto de la ventana */
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente oscuro */
+    display: flex; /* Centrado del contenido modal */
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+    z-index: 1000; /* Asegura que esté por encima del contenido de la página */
+  }
+
+.product-form {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    width: 400px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+  }
+  
+  .product-form h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+  }
+  
+  .product-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .product-form input[type="text"],
+  .product-form input[type="number"],
+  .product-form textarea,
+  .product-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    color: #333;
+  }
+  
+  .product-form textarea {
+    resize: vertical;
+    height: 80px;
+  }
+  
+  .product-form input[type="number"] {
+    -moz-appearance: textfield;
+  }
+  
+  .product-form select {
+    appearance: none;
+    background-color: #fff;
+  }
+  
+  .product-form .form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .product-form button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    color: #fff;
+  }
+  
+  .product-form button[type="submit"] {
+    background-color: #333;
+  }
+  
+  .product-form button[type="button"] {
+    background-color: #aaa;
+  }
+  
+  .product-form button:hover {
+    opacity: 0.8;
+  }
+  

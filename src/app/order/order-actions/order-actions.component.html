@@ -1,0 +1,9 @@
+<select (change)="onStatusChange($event)">
+  <option [value]="'pending'" [selected]="order.status === 'pending'">Pendiente</option>
+  <option [value]="'paid'" [selected]="order.status === 'paid'">Pagado</option>
+  <option [value]="'shipped'" [selected]="order.status === 'shipped'">Enviado</option>
+  <option [value]="'delivered'" [selected]="order.status === 'delivered'">Entregado</option>
+  
+</select>
+  <button class="section-btn" (click)="editOrder.emit(order)">Detalles</button>
+  <button class="section-btn" (click)="deleteUser.emit(order._id)">Eliminar</button>

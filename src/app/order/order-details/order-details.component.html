@@ -1,0 +1,52 @@
+<div class="modal-overlay">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>Detalles del Pedido {{order.id}}</h2>
+        <button class="close-button" (click)="closeModal()">cerrar</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="info-grid">
+          <div class="customer-info">
+            <h3>Información del Cliente</h3>
+            <p><strong>Nombre:</strong> {{order.id}}</p>
+            <p><strong>Dirección de envío:</strong> {{order.id}}</p>
+            <p><strong>Método de pago:</strong> {{order.paymentMethod}}</p>
+          </div>
+
+          <div class="order-status">
+            <h3>Estado del Pedido</h3>
+            <span class="status-badge" [class]="'status-' + order.status">
+              <i class="status-icon"></i>
+              {{order.status}}
+            </span>
+          </div>
+        </div>
+
+        <div class="products-section">
+          <h3>Productos</h3>
+          <table class="products-table">
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Subtotal</th>
+              </tr>
+            </thead>
+            <!-- <tbody>
+              <tr *ngFor="let item of order.items">
+                <td>{{item.name}}</td>
+                <td>{{item.quantity}}</td>
+                <td>${{item.price.toFixed(2)}}</td>
+              </tr>
+            </tbody> -->
+          </table>
+        </div>
+
+        <div class="total-section">
+          <p class="total-amount">Total: ${{order.total.toFixed(2)}}</p>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -14,6 +14,8 @@ import { FormUserComponent } from './users/form-user/form-user.component';
 import { ManageUsersComponent } from './users/manage-users/manage-users.component';
 import { FormProductsComponent } from './products/form-products/form-products.component';
 import { ManageProductsComponent } from './products/manage-products/manage-products.component';
+import { OrderDashboardComponent } from './order/order-dashboard/order-dashboard.component';
+import { OrderDetailsComponent } from './order/order-details/order-details.component';
 
 export const routes: Routes = [
   {
@@ -48,6 +50,14 @@ export const routes: Routes = [
         path: 'dashboard',
         component: DashboardComponent
       },
+      {
+        path: 'manageOrders',
+        component: OrderDashboardComponent
+      },
+      {
+        path: 'orderDetail',
+        component: OrderDetailsComponent
+      }
     ]
   },
   {

@@ -1,0 +1,35 @@
+<div class="container">
+  <h1>Gestión de Pedidos</h1>
+  <div class="search-bar">
+    <input type="text" placeholder="Buscar por estado del pedido..." id="searchUser" (keyup.enter)="ngOnChanges(textInput.value)" #textInput />
+  </div>
+
+  <div class="dashboard">
+    <div class="dashboard-item">
+      <p>Total Pedidos</p>
+      <h2>{{ totalOrders }}</h2>
+    </div>
+    <div class="dashboard-item">
+      <p>Pendientes</p>
+      <h2>{{ pendingOrders }}</h2>
+    </div>
+    <div class="dashboard-item">
+      <p>En Proceso</p>
+      <h2>{{ shippedOrders }}</h2>
+    </div>
+    <div class="dashboard-item">
+      <p>Entregados</p>
+      <h2>{{ deliveredOrders }}</h2>
+    </div>
+    <div class="dashboard-item">
+      <p>Pagados</p>
+      <h2>{{ paidOrders }}</h2>
+    </div>
+  </div>
+
+
+   <app-order-list></app-order-list> 
+
+  
+
+
