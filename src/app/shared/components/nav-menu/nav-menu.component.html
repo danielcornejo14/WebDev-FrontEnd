@@ -18,7 +18,7 @@
           <span class="red-text">Car</span>
         </div>
         <div class="search-container">
-          <app-search-box></app-search-box>
+          <app-search-box [suggestions]="this.productNames" (onValue)="searchProduct($event)"></app-search-box>
         </div>
 
         <span class="spacer"></span>

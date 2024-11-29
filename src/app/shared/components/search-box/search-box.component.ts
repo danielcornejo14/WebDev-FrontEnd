@@ -1,8 +1,9 @@
-import { InputTextModule } from 'primeng/inputtext';
-import { Component, EventEmitter,Input, Output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { InputGroupModule } from 'primeng/inputgroup';
-import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 
@@ -11,23 +12,24 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
   standalone: true,
   imports: [
     FormsModule,
-    InputTextModule,
-    InputGroupModule,
-    InputGroupAddonModule
+    MatInputModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    ReactiveFormsModule
   ],
   templateUrl: './search-box.component.html',
   styleUrl: './search-box.component.scss'
 })
 export class SearchBoxComponent {
-  value: string|undefined;
 
-  @Output()
-  public onValue = new EventEmitter<string>();
+  value: string|undefined;
+  @Input() suggestions!: string[];
+  @Output() onValue = new EventEmitter<string>();
+
+  myControl = new FormControl('');
   
   emitValue(value:string): void{
-    //this.onValue.emit(value);
-    console.log(value);
+    this.onValue.emit(value);
   }
-
 
 }
