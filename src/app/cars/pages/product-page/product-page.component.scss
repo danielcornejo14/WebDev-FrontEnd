@@ -95,6 +95,23 @@
   cursor: pointer;
 }
 
+.small-yellow-button {
+  padding: 0.5rem 1rem; 
+  font-size: 0.875rem;
+  background-color: #ebb135;
+  border: none;
+  color: white;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+
 .small-green-button:hover {
   background-color: #45a049;
+}
+
+.action-container{
+  display: flex;
+  gap: 1rem;
 }
