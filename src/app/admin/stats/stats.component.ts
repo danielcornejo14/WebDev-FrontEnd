@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 Chart.register(...registerables);
 import { CommonModule } from '@angular/common';
@@ -11,9 +11,13 @@ import { CommonModule } from '@angular/common';
   templateUrl: './stats.component.html',
   styleUrl: './stats.component.scss'
 })
-export class StatsComponent implements AfterViewInit{
+export class StatsComponent implements OnInit,AfterViewInit{
 
-  activeTab = 'products';
+  @ViewChild('productsChart') productsChartElement!: ElementRef;
+  @ViewChild('usersChart') usersChartElement!: ElementRef;
+  @ViewChild('ordersChart') ordersChartElement!: ElementRef;
+
+  activeTab = 'users';
   charts: { [key: string]: Chart } = {};
   
   metrics = [
@@ -78,8 +82,46 @@ export class StatsComponent implements AfterViewInit{
     { date: '2024-02-21', value: 62, revenue: 6200 }
   ];
 
+  ngOnInit() {
+    // Initialize the charts data
+    this.initializeChartsData();
+  }
+
+  private initializeChartsData() {
+    // Initialize the charts with default data
+    this.topProducts = [
+      { name: 'Chevrolet Bel Air', sales: 200 },
+      { name: 'Ford Mustang 1965', sales: 98 },
+      { name: 'BMW X5', sales: 86 },
+      { name: 'Porsche 911', sales: 72 },
+      { name: 'Mercedes-Benz SL500', sales: 65 }
+    ];
+
+    this.dailyUsers = [
+      { date: '2024-02-15', value: 245 },
+      { date: '2024-02-16', value: 288 },
+      { date: '2024-02-17', value: 256 },
+      { date: '2024-02-18', value: 311 },
+      { date: '2024-02-19', value: 275 },
+      { date: '2024-02-20', value: 298 },
+      { date: '2024-02-21', value: 322 }
+    ];
+
+    this.dailyOrders = [
+      { date: '2024-02-15', value: 45, revenue: 4500 },
+      { date: '2024-02-16', value: 52, revenue: 5200 },
+      { date: '2024-02-17', value: 48, revenue: 4800 },
+      { date: '2024-02-18', value: 61, revenue: 6100 },
+      { date: '2024-02-19', value: 55, revenue: 5500 },
+      { date: '2024-02-20', value: 58, revenue: 5800 },
+      { date: '2024-02-21', value: 62, revenue: 6200 }
+    ];
+  }
+
   ngAfterViewInit() {
-    this.initializeCharts();
+    setTimeout(() => {
+      this.initializeCharts();
+    });
   }
 
   setActiveTab(tabId: string) {
@@ -99,22 +141,22 @@ export class StatsComponent implements AfterViewInit{
         { name: 'Mazda RX-7', sales: 30 }
         ];
       this.dailyUsers = [
-      { date: '2024-02-08', value: 220 },
-      { date: '2024-02-09', value: 230 },
-      { date: '2024-02-10', value: 240 },
-      { date: '2024-02-11', value: 250 },
-      { date: '2024-02-12', value: 260 },
-      { date: '2024-02-13', value: 270 },
-      { date: '2024-02-14', value: 280 }
+        { date: '2024-02-15', value: 260 },
+        { date: '2024-02-16', value: 310 },
+        { date: '2024-02-17', value: 290 },
+        { date: '2024-02-18', value: 340 },
+        { date: '2024-02-19', value: 305 },
+        { date: '2024-02-20', value: 330 },
+        { date: '2024-02-21', value: 360 }
       ];
       this.dailyOrders = [
-      { date: '2024-02-08', value: 40, revenue: 4000 },
-      { date: '2024-02-09', value: 42, revenue: 4200 },
-      { date: '2024-02-10', value: 44, revenue: 4400 },
-      { date: '2024-02-11', value: 46, revenue: 4600 },
-      { date: '2024-02-12', value: 48, revenue: 4800 },
-      { date: '2024-02-13', value: 50, revenue: 5000 },
-      { date: '2024-02-14', value: 52, revenue: 5200 }
+        { date: '2024-02-15', value: 50, revenue: 5000 },
+        { date: '2024-02-16', value: 58, revenue: 5800 },
+        { date: '2024-02-17', value: 53, revenue: 5300 },
+        { date: '2024-02-18', value: 66, revenue: 6600 },
+        { date: '2024-02-19', value: 60, revenue: 6000 },
+        { date: '2024-02-20', value: 64, revenue: 6400 },
+        { date: '2024-02-21', value: 68, revenue: 6800 }
       ];
     } else if (select.value === '7d') {
       this.topProducts = [
@@ -125,22 +167,22 @@ export class StatsComponent implements AfterViewInit{
         { name: 'Jaguar E-Type', sales: 20 }
         ];
       this.dailyUsers = [
-      { date: '2024-01-15', value: 200 },
-      { date: '2024-01-16', value: 210 },
-      { date: '2024-01-17', value: 220 },
-      { date: '2024-01-18', value: 230 },
-      { date: '2024-01-19', value: 240 },
-      { date: '2024-01-20', value: 250 },
-      { date: '2024-01-21', value: 260 }
+        { date: '2024-02-15', value: 240 },
+        { date: '2024-02-16', value: 275 },
+        { date: '2024-02-17', value: 255 },
+        { date: '2024-02-18', value: 300 },
+        { date: '2024-02-19', value: 270 },
+        { date: '2024-02-20', value: 290 },
+        { date: '2024-02-21', value: 320 }
       ];
       this.dailyOrders = [
-      { date: '2024-01-15', value: 35, revenue: 3500 },
-      { date: '2024-01-16', value: 37, revenue: 3700 },
-      { date: '2024-01-17', value: 39, revenue: 3900 },
-      { date: '2024-01-18', value: 41, revenue: 4100 },
-      { date: '2024-01-19', value: 43, revenue: 4300 },
-      { date: '2024-01-20', value: 45, revenue: 4500 },
-      { date: '2024-01-21', value: 47, revenue: 4700 }
+        { date: '2024-02-15', value: 47, revenue: 4700 },
+        { date: '2024-02-16', value: 54, revenue: 5400 },
+        { date: '2024-02-17', value: 50, revenue: 5000 },
+        { date: '2024-02-18', value: 63, revenue: 6300 },
+        { date: '2024-02-19', value: 57, revenue: 5700 },
+        { date: '2024-02-20', value: 61, revenue: 6100 },
+        { date: '2024-02-21', value: 66, revenue: 6600 }
       ];}
 
       else if (select.value === '30d') {
@@ -152,22 +194,22 @@ export class StatsComponent implements AfterViewInit{
         { name: '	Tesla Roadster', sales: 30 }
         ];
       this.dailyUsers = [
-      { date: '2024-01-15', value: 200 },
-      { date: '2024-01-16', value: 210 },
-      { date: '2024-01-17', value: 220 },
-      { date: '2024-01-18', value: 230 },
-      { date: '2024-01-19', value: 240 },
-      { date: '2024-01-20', value: 250 },
-      { date: '2024-01-21', value: 260 }
+        { date: '2024-02-15', value: 280 },
+        { date: '2024-02-16', value: 320 },
+        { date: '2024-02-17', value: 295 },
+        { date: '2024-02-18', value: 350 },
+        { date: '2024-02-19', value: 315 },
+        { date: '2024-02-20', value: 340 },
+        { date: '2024-02-21', value: 370 }
       ];
       this.dailyOrders = [
-      { date: '2024-01-15', value: 35, revenue: 3500 },
-      { date: '2024-01-16', value: 37, revenue: 3700 },
-      { date: '2024-01-17', value: 39, revenue: 3900 },
-      { date: '2024-01-18', value: 41, revenue: 4100 },
-      { date: '2024-01-19', value: 43, revenue: 4300 },
-      { date: '2024-01-20', value: 45, revenue: 4500 },
-      { date: '2024-01-21', value: 47, revenue: 4700 }
+        { date: '2024-02-15', value: 55, revenue: 5500 },
+        { date: '2024-02-16', value: 62, revenue: 6200 },
+        { date: '2024-02-17', value: 57, revenue: 5700 },
+        { date: '2024-02-18', value: 71, revenue: 7100 },
+        { date: '2024-02-19', value: 65, revenue: 6500 },
+        { date: '2024-02-20', value: 69, revenue: 6900 },
+        { date: '2024-02-21', value: 73, revenue: 7300 }
       ];}
       else if (select.value === '90d') {
         this.topProducts = [
@@ -178,25 +220,26 @@ export class StatsComponent implements AfterViewInit{
           { name: 'Volkswagen Golf', sales: 65 }
           ];
         this.dailyUsers = [
-        { date: '2024-01-15', value: 200 },
-        { date: '2024-01-16', value: 210 },
-        { date: '2024-01-17', value: 220 },
-        { date: '2024-01-18', value: 230 },
-        { date: '2024-01-19', value: 240 },
-        { date: '2024-01-20', value: 250 },
-        { date: '2024-01-21', value: 260 }
+          { date: '2024-02-15', value: 230 },
+          { date: '2024-02-16', value: 270 },
+          { date: '2024-02-17', value: 250 },
+          { date: '2024-02-18', value: 310 },
+          { date: '2024-02-19', value: 280 },
+          { date: '2024-02-20', value: 300 },
+          { date: '2024-02-21', value: 335 }
         ];
         this.dailyOrders = [
-        { date: '2024-01-15', value: 35, revenue: 3500 },
-        { date: '2024-01-16', value: 37, revenue: 3700 },
-        { date: '2024-01-17', value: 39, revenue: 3900 },
-        { date: '2024-01-18', value: 41, revenue: 4100 },
-        { date: '2024-01-19', value: 43, revenue: 4300 },
-        { date: '2024-01-20', value: 45, revenue: 4500 },
-        { date: '2024-01-21', value: 47, revenue: 4700 }
+          { date: '2024-02-15', value: 46, revenue: 4600 },
+          { date: '2024-02-16', value: 53, revenue: 5300 },
+          { date: '2024-02-17', value: 49, revenue: 4900 },
+          { date: '2024-02-18', value: 64, revenue: 6400 },
+          { date: '2024-02-19', value: 58, revenue: 5800 },
+          { date: '2024-02-20', value: 62, revenue: 6200 },
+          { date: '2024-02-21', value: 67, revenue: 6700 }
         ];
     }
-    //this.updateChart(this.activeTab);
+    this.updateChart(this.activeTab);
+    this.initializeCharts();
   }
 
   private initializeCharts() {
@@ -269,18 +312,24 @@ export class StatsComponent implements AfterViewInit{
   private updateChart(tabId: string) {
     if (this.charts[tabId]) {
       // Update the chart data based on the current tab
+      console.log('Updating chart:', tabId);
       switch(tabId) {
         case 'products':
           console.log('Updating products chart');
-          console.log(this.topProducts);
+          console.log('Top products:', this.topProducts);
           this.charts['products'].data.labels = this.topProducts.map(p => p.name);
           this.charts['products'].data.datasets[0].data = this.topProducts.map(p => p.sales);
+
           break;
         case 'users':
+          console.log('Updating users chart');
+          console.log('Daily users:', this.dailyUsers);
           this.charts['users'].data.labels = this.dailyUsers.map(d => d.date);
           this.charts['users'].data.datasets[0].data = this.dailyUsers.map(d => d.value);
           break;
         case 'orders':
+          console.log('Updating orders chart');
+          console.log('Daily orders:', this.dailyOrders);
           this.charts['orders'].data.labels = this.dailyOrders.map(d => d.date);
           this.charts['orders'].data.datasets[0].data = this.dailyOrders.map(d => d.value);
           break;
