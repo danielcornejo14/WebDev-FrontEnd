@@ -10,25 +10,27 @@ import { SellPageComponent } from './cars/pages/sell-page/sell-page.component';
 import { MainComponent } from './admin/main/main.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { ModifyPageComponent } from './cars/pages/modify-page/modify-page.component';
-import { CartPageComponent } from './cars/pages/cart-page/cart-page.component';
+import { FormUserComponent } from './users/form-user/form-user.component';
+import { ManageUsersComponent } from './users/manage-users/manage-users.component';
+import { FormProductsComponent } from './products/form-products/form-products.component';
+import { ManageProductsComponent } from './products/manage-products/manage-products.component';
 
 export const routes: Routes = [
-    {
-        path: 'home',
-        component: LayoutPageComponent,
-        children: [
-          { path: 'landing', component: LandingPageComponent },
-          { path: 'product-list', component: ProductListPageComponent },
-          { path: 'product-list/:id', component: ProductPageComponent },
-          { path: 'sell', component: SellPageComponent },
-          { path: 'modify-product/:id', component: ModifyPageComponent },
-          { path: 'cart', component: CartPageComponent},
-          { path: '**', redirectTo: 'landing' },
-        ]
-    },
-    {
-      path: 'login',
-      component: LoginComponent
+  {
+    path: 'home',
+    component: LayoutPageComponent,
+    children: [
+      { path: 'landing', component: LandingPageComponent },
+      { path: 'product-list', component: ProductListPageComponent },
+      { path: 'product-list/:id', component: ProductPageComponent },
+      { path: 'sell', component: SellPageComponent },
+      { path: 'modify-product/:id', component: ModifyPageComponent },
+      { path: '**', redirectTo: 'landing' },
+    ]
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: 'register',
@@ -46,6 +48,40 @@ export const routes: Routes = [
         path: 'dashboard',
         component: DashboardComponent
       },
+    ]
+  },
+  {
+    path: 'users',
+    children: [
+      {
+        path: 'addUser',
+        component: FormUserComponent
+      },
+      {
+        path: 'manageUsers',
+        component: ManageUsersComponent
+      },
+      {
+        path: 'editUser',
+        component: FormUserComponent
+      }
+    ]
+  },
+  {
+    path: 'products',
+    children: [
+      {
+        path: 'addProduct',
+        component: FormProductsComponent
+      },
+      {
+        path: 'manageProducts',
+        component: ManageProductsComponent
+      },
+      {
+        path: 'editProduct',
+        component: FormProductsComponent
+      }
     ]
   },
   {

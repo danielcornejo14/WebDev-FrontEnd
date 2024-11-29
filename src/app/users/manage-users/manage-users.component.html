@@ -1,0 +1,21 @@
+<div class="container">
+    <h1>Gestión de Usuarios</h1>
+    <div class="search-bar">
+      <input type="text" placeholder="Buscar usuarios..."   (keyup.enter)="ngOnChanges(textInput.value)" id="searchUser" #textInput/>
+      <button routerLink="/users/addUser" routerLinkActive="active" >Agregar Usuario</button>
+    </div>
+
+    <app-table-users 
+        [users]="filteredUsers" 
+      (editUser)="editUser($event)" 
+      (deleteUser)="deleteUser($event)"></app-table-users>
+
+
+      <app-form-user *ngIf="showForm"
+        [user | null ]="selectedUser"
+        (saveUser)="saveUser($event)" 
+        (close)="showForm = false">
+      </app-form-user>
+
+  </div>
+  

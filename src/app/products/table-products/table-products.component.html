@@ -1,0 +1,35 @@
+<table class="product-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Imagen</th>
+        <th>Nombre</th>
+        <th>Categoría</th>
+        <th>Marca</th>
+        <th>Precio</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{ product.id }}</td>
+        <td><img [src]="product.image[0]" alt="{{product.name}}" /></td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.category }}</td>
+        <td>{{ product.brand }}</td>
+        <td>${{ product.price.toFixed(2) }}</td>
+        <td>
+          <button class="edit-button" (click)="editProduct.emit(product)">✏️</button>
+          <button class="delete-button" (click)="deleteProduct.emit(+product.id)">🗑️</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="d-flex bd-highlight">
+    <p id="paginationInfo" class="p-2 w-100 bd-highlight">Mostrando 1 a 10 de <span id="totalUsers">0</span> resultados</p>
+    <div class="pagination p-2 flex-shrink-1 bd-highlight">
+      <button id="prevPage">&lt;</button>
+      <button id="nextPage">&gt;</button>
+    </div>
+  </div>
+  

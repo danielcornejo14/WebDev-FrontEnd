@@ -1,0 +1,25 @@
+<div class="product-form">
+    <h2>{{ product ? 'Editar Producto' : 'Agregar Producto' }}</h2>
+    <form (ngSubmit)="submitForm()">
+      <label>Nombre:</label>
+      <input type="text" [(ngModel)]="product.name" name="nombre" required />
+  
+      <label>Categoría:</label>
+      <input type="text" [(ngModel)]="product.category" name="categoria" required />
+  
+      <label>Marca:</label>
+      <input type="text" [(ngModel)]="product.brand" name="marca" required />
+  
+      <label>Precio:</label>
+      <input type="number" [(ngModel)]="product.price" name="precio" required />
+  
+      <label>Imagen:</label>
+      <input type="text" [(ngModel)]="product.image[0]" name="imagen" required />
+  
+      <div class="form-actions">
+        <button type="submit">{{ product ? 'Actualizar' : 'Agregar' }}</button>
+        <button type="button">Cancelar</button>
+      </div>
+    </form>
+  </div>
+  

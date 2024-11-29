@@ -1,0 +1,21 @@
+<div class="products-management">
+    <h1 class="mx-2">Gestión de Productos</h1>
+    
+    <div class="search-bar mx-3">
+      <input type="text" placeholder="Buscar productos..." (keyup.enter)="ngOnChanges(textInput.value)" id="searchUser" #textInput />
+      <button routerLink="/products/addProduct" routerLinkActive="active" >Agregar Producto</button>
+    </div>
+  
+    <app-table-products 
+      [products]="filteredProducts" 
+      (editProduct)="editProduct($event)" 
+      (deleteProduct)="deleteProduct($event)">
+    </app-table-products>
+  
+    <app-form-products
+      *ngIf="showForm" 
+      [product | null]="selectedProduct" 
+      (closeForm)="closeForm()">
+    </app-form-products>
+  </div>
+  
