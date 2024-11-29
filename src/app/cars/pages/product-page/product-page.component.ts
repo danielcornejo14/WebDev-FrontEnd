@@ -35,6 +35,7 @@ export class ProductPageComponent {
   protected isLoggedIn: boolean = false;
   protected userRole: string | null = null;
   protected reviews: Review[] = [];
+  protected rating: number = 0;
 
   constructor(
     private router: ActivatedRoute,
@@ -73,6 +74,7 @@ export class ProductPageComponent {
     this.reviewService.getReviewByProduct(this.product.id)
       .subscribe(reviews => {
         this.reviews = reviews;
+        this.rating = this.reviews.length > 0 ? this.reviews.reduce((acc, review) => acc + review.rating, 0) / this.reviews.length : 0
       });
   }
 
@@ -88,5 +90,6 @@ export class ProductPageComponent {
       console.log('Producto agregado al carrito');
     }
   }
+
 
 }

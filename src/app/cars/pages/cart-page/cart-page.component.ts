@@ -30,7 +30,6 @@ export class CartPageComponent implements OnInit {
   }
 
   loadCartItems(): void {
-    debugger;
     this.cartService.getCart().subscribe(cart => {
       console.log(cart);
       

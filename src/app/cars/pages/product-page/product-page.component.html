@@ -13,8 +13,7 @@
         <p class="product-description">{{ product.description }}</p>
         <p>Price: ${{ product.price }}</p>
         <p>Brand: {{ product.brand }}</p>
-        <p>Rating: <p-rating [(ngModel)]="product.rating" [readonly]="true" [cancel]="false"></p-rating></p>
-        
+        <p>Rating: <p-rating [(ngModel)]="rating" [readonly]="true" [cancel]="false"></p-rating></p>
         <div>
           <button pButton type="button" label="Add to Cart" icon="pi pi-shopping-cart" class="small-green-button" (click)="addToCart()"></button>
         </div>
