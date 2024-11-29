@@ -3,17 +3,19 @@
     
     <div class="search-bar mx-3">
       <input type="text" placeholder="Buscar productos..." (keyup.enter)="ngOnChanges(textInput.value)" id="searchUser" #textInput />
-      <button routerLink="/products/addProduct" routerLinkActive="active" >Agregar Producto</button>
+      <button (click)="onNewProduct()">Agregar Producto</button>
     </div>
   
     <app-table-products 
       [products]="filteredProducts" 
-      (editProduct)="editProduct($event)" 
+      (editProduct)="onEditProduct($event)" 
       (deleteProduct)="deleteProduct($event)">
     </app-table-products>
+
     @if(selectedProduct){
       <app-form-products
-      [product]="selectedProduct" 
+      [product]="selectedProduct"
+      (saveProduct)="saveProduct($event)" 
       (closeForm)="closeForm()">
     </app-form-products>
     }

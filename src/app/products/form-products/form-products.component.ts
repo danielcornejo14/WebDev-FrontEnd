@@ -15,48 +15,26 @@ import { RouterModule } from '@angular/router';
   styleUrl: './form-products.component.scss',
 })
 export class FormProductsComponent {
-  @Input() product: Product = {
-    id: 0,
-    name: '',
-    brand: '',
-    discount: 0,
-    description: '',
-    price: 0,
-    image: '',
-    category: { id: 0, name: '', subcategories: [] },
-    rating: 0,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  };
+  @Input() product!: Product;
   @Output() saveProduct = new EventEmitter<Product>();
   @Output() close = new EventEmitter<void>();
 
   showForm: boolean = true;
 
-  openForm(product?: Product): void {
-    this.product = product || {
-      id: 0,
-      name: '',
-      brand: '',
-      description: '',
-      price: 0,
-      discount: 0,
-      image: '',
-      category: { id: 0, name: '', subcategories: [] },
-      rating: 0,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
+  ngOnInit(): void {
+    console.log('product', this.product);
+  }
+
+  openForm(product?: any): void {
+    this.product = product || {}; // Si se pasa un usuario, se edita, si no, es nuevo
     this.showForm = true;
   }
 
   closeModal(): void {
-    this.showForm = false;
     this.close.emit();
   }
 
   submitForm(): void {
     this.saveProduct.emit(this.product);
-    this.closeModal();
   }
 }

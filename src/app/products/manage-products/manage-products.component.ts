@@ -35,9 +35,10 @@ export class ManageProductsComponent implements OnInit{
     this.selectedProduct = null;
   }
 
-  editProduct(product: Product): void {
+  onEditProduct(product: Product): void {
     console.log('product', product);
-    this.selectedProduct = product;
+    this.selectedProduct = { ...product };
+    this.showForm = true;
   }
 
   deleteProduct(id: number | string): void {
@@ -47,6 +48,7 @@ export class ManageProductsComponent implements OnInit{
         this.filteredProducts = [...this.products];
       }
     });
+    window.location.reload();
   }
 
   saveProduct(product: Product): void {
@@ -64,7 +66,25 @@ export class ManageProductsComponent implements OnInit{
         this.filteredProducts = [...this.products];
       });
     }
-    this.closeForm();
+    this.selectedProduct = null;
+    window.location.reload();
+  }
+
+  onNewProduct() {
+    const newProduct: Product = {
+      id: '',
+      name: '',
+      description: '',
+      price: 0,
+      category: { id: '', name: '', subcategories: [] },
+      image: '',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      brand: '',
+      discount: 0,
+      rating: 0
+    };
+    this.selectedProduct = newProduct;
   }
 
   ngOnChanges(value:string): void {

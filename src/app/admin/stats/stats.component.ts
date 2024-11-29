@@ -25,7 +25,7 @@ export class StatsComponent implements AfterViewInit{
       icon: 'icon-dollar'
     },
     {
-      title: 'Pedidos',
+      title: 'Pedidos Realizados',
       value: '381',
       trend: '+15% respecto al período anterior',
       icon: 'icon-cart'
@@ -52,11 +52,11 @@ export class StatsComponent implements AfterViewInit{
 
   // Mock data
   topProducts = [
-    { name: 'Smartphone X', sales: 200 },
-    { name: 'Laptop Pro', sales: 98 },
-    { name: 'Tablet Mini', sales: 86 },
-    { name: 'Smartwatch', sales: 72 },
-    { name: 'Auriculares BT', sales: 65 }
+    { name: 'Chevrolet Bel Air', sales: 200 },
+    { name: 'Ford Mustang 1965', sales: 98 },
+    { name: 'BMW X5', sales: 86 },
+    { name: 'Porsche 911', sales: 72 },
+    { name: 'Mercedes-Benz SL500', sales: 65 }
   ];
 
   dailyUsers = [
@@ -91,15 +91,13 @@ export class StatsComponent implements AfterViewInit{
   onPeriodChange(event: Event) {
     const select = event.target as HTMLSelectElement;
     console.log('Período seleccionado:', select.value);
-    // Aquí iría la lógica para actualizar los datos según el período
-    // Simulate data update based on selected period
     if (select.value === '24h') {
       this.topProducts = [
-        { name: 'Smartphone X', sales: 120 },
-        { name: 'Laptop Pro', sales: 98 },
-        { name: 'Tablet Mini', sales: 86 },
-        { name: 'Smartwatch', sales: 72 },
-        { name: 'Auriculares BT', sales: 65 }
+        { name: 'Pontiac GTO', sales: 152 },
+        { name: 'Ford Hot Rod', sales: 102 },
+        { name: 'Volkswagen Beetle', sales: 65 },
+        { name: 'Audi A4', sales: 50 },
+        { name: 'Mazda RX-7', sales: 30 }
         ];
       this.dailyUsers = [
       { date: '2024-02-08', value: 220 },
@@ -121,11 +119,11 @@ export class StatsComponent implements AfterViewInit{
       ];
     } else if (select.value === '7d') {
       this.topProducts = [
-        { name: 'Smartphone X', sales: 120 },
-        { name: 'Laptop Pro', sales: 98 },
-        { name: 'Tablet Mini', sales: 86 },
-        { name: 'Smartwatch', sales: 72 },
-        { name: 'Auriculares BT', sales: 65 }
+        { name: 'Dodge Charger', sales: 80 },
+        { name: 'Chevrolet Bel Air', sales: 78 },
+        { name: 'Mahindra Young', sales: 44 },
+        { name: 'Honda Ray', sales: 23 },
+        { name: 'Jaguar E-Type', sales: 20 }
         ];
       this.dailyUsers = [
       { date: '2024-01-15', value: 200 },
@@ -148,11 +146,11 @@ export class StatsComponent implements AfterViewInit{
 
       else if (select.value === '30d') {
       this.topProducts = [
-        { name: 'Smartphone X', sales: 120 },
-        { name: 'Laptop Pro', sales: 98 },
-        { name: 'Tablet Mini', sales: 86 },
-        { name: 'Smartwatch', sales: 72 },
-        { name: 'Auriculares BT', sales: 65 }
+        { name: 'Audi A4', sales: 95 },
+        { name: 'Toyota Supra MK4', sales: 84 },
+        { name: 'Mercedes-Benz 190E', sales: 75 },
+        { name: 'BMW X5', sales: 72 },
+        { name: '	Tesla Roadster', sales: 30 }
         ];
       this.dailyUsers = [
       { date: '2024-01-15', value: 200 },
@@ -174,11 +172,11 @@ export class StatsComponent implements AfterViewInit{
       ];}
       else if (select.value === '90d') {
         this.topProducts = [
-          { name: 'Smartphone X', sales: 120 },
-          { name: 'Laptop Pro', sales: 98 },
-          { name: 'Tablet Mini', sales: 86 },
-          { name: 'Smartwatch', sales: 72 },
-          { name: 'Auriculares BT', sales: 65 }
+          { name: 'Peugeot 5008', sales: 120 },
+          { name: 'Mercedes-Benz SL500', sales: 98 },
+          { name: 'NIO ET6', sales: 86 },
+          { name: 'Mercedes-Benz CMP', sales: 72 },
+          { name: 'Volkswagen Golf', sales: 65 }
           ];
         this.dailyUsers = [
         { date: '2024-01-15', value: 200 },
@@ -271,6 +269,25 @@ export class StatsComponent implements AfterViewInit{
 
   private updateChart(tabId: string) {
     if (this.charts[tabId]) {
+      // Update the chart data based on the current tab
+      switch(tabId) {
+        case 'products':
+          console.log('Updating products chart');
+          console.log(this.topProducts);
+          this.charts['products'].data.labels = this.topProducts.map(p => p.name);
+          this.charts['products'].data.datasets[0].data = this.topProducts.map(p => p.sales);
+          break;
+        case 'users':
+          this.charts['users'].data.labels = this.dailyUsers.map(d => d.date);
+          this.charts['users'].data.datasets[0].data = this.dailyUsers.map(d => d.value);
+          break;
+        case 'orders':
+          this.charts['orders'].data.labels = this.dailyOrders.map(d => d.date);
+          this.charts['orders'].data.datasets[0].data = this.dailyOrders.map(d => d.value);
+          break;
+      }
+      
+      // Trigger chart update
       this.charts[tabId].update();
     }
   }

@@ -35,6 +35,7 @@ export const routes: Routes = [
       { path: 'cart', component: CartPageComponent },
       {path: 'productAlert', component: ProductAlertComponent},
       {path: 'main',component: MainComponent,},
+      {path: 'pedidos',component: ManageProductsComponent,},
       // {path: 'manageUsers',component: ManageUsersComponent,},
       
       { path: '**', redirectTo: 'landing' },
