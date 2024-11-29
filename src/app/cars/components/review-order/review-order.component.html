@@ -1,0 +1,25 @@
+<div>
+    <h2>Order Review</h2>
+    <div *ngFor="let item of cartItems">
+        <p>{{ item.product.name }} - Quantity: {{ item.quantity }}</p>
+        <p>Price: {{ item.product.price | currency }}</p>
+    </div>
+    <div>
+        <p>Tax: {{ tax | currency }}</p>
+        <p>Total: {{ total | currency }}</p>
+    </div>
+    <div>
+        <h3>Shipping Information</h3>
+        <p>Name: {{ shipping.get('name')?.value }}</p>
+        <p>Address: {{ shipping.get('address')?.value }}</p>
+        <p>City: {{ shipping.get('city')?.value }}</p>
+        <p>Postal Code: {{ shipping.get('postalCode')?.value }}</p>
+    </div>
+    <div>
+        <h3>Payment Information</h3>
+        <p>Card Number: {{ payment.get('cardNumber')?.value }}</p>
+        <p>Card Holder: {{ payment.get('cardName')?.value }}</p>
+        <p>Expiry Date: {{ payment.get('expiryDate')?.value }}</p>
+        <p>Payment Method: {{ payment.get('paymentMethod')?.value }}</p>
+    </div>
+</div>

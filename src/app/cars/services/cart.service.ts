@@ -16,7 +16,7 @@ export class CartService {
   private createAuthHeaders(): HttpHeaders {
     const token = localStorage.getItem('token');
     return new HttpHeaders({
-      'Authorization': `${token}`
+      Authorization: `${token}`,
     });
   }
 
@@ -41,6 +41,14 @@ export class CartService {
       productId: productId
     };
     return this.http.delete<any>(`${this.apiUrl}/deleteProduct`, { headers, body });
+  }
+
+  checkout(payment: string): Observable<any> {
+    const headers = this.createAuthHeaders();
+    const body = {
+      paymentMethod: payment
+    };
+    return this.http.post<any>(`${this.apiUrl}/checkout`, body,{ headers});
   }
 
 }

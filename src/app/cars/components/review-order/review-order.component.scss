@@ -1,0 +1,38 @@
+div {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+h2, h3 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+p {
+    margin: 5px 0;
+    color: #555;
+}
+
+div *ngFor {
+    margin-bottom: 15px;
+}
+
+div > div {
+    margin-bottom: 20px;
+}
+
+div > div > p {
+    margin-left: 20px;
+}
+
+div > div > h3 {
+    margin-top: 20px;
+}
+
+.currency {
+    font-weight: bold;
+    color: #000;
+}
