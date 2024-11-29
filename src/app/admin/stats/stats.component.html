@@ -1,0 +1,57 @@
+<div class="dashboard-container">
+    <!-- Header Section -->
+    <div class="dashboard-header">
+      <div class="header-title">
+        <h2>Dashboard</h2>
+        <p>Resumen de estadísticas y métricas principales</p>
+      </div>
+      <div class="header-actions">
+        <select class="time-range-select" (change)="onPeriodChange($event)">
+          <option value="24h">Últimas 24 horas</option>
+          <option value="7d" selected>Últimos 7 días</option>
+          <option value="30d">Últimos 30 días</option>
+          <option value="90d">Últimos 90 días</option>
+        </select>
+      </div>
+    </div>
+
+
+    <!-- Metrics Cards -->
+    <div class="metrics-grid">
+      <div class="metric-card" *ngFor="let metric of metrics">
+        <div class="metric-header">
+          <span class="metric-title">{{metric.title}}</span>
+          <i class="metric-icon" [class]="metric.icon"></i>
+        </div>
+        <div class="metric-content">
+          <div class="metric-value">{{metric.value}}</div>
+          <p class="metric-trend">{{metric.trend}}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts Section -->
+    <!-- Charts Section -->
+    <div class="charts-section">
+        <div class="charts-tabs">
+          <button 
+            *ngFor="let tab of tabs" 
+            [class.active]="activeTab === tab.id"
+            (click)="setActiveTab(tab.id)"
+            class="tab-button">
+            {{tab.label}}
+          </button>
+        </div>
+      
+      <div *ngIf="activeTab === 'products'">
+        <canvas id="productsChart"></canvas>
+      </div>
+      
+      <div *ngIf="activeTab === 'users'">
+        <canvas id="usersChart"></canvas>
+      </div>
+
+      <div *ngIf="activeTab === 'orders'">
+        <canvas id="usersChart"></canvas>
+      </div>
+  </div>

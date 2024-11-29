@@ -25,7 +25,8 @@
 
         <div class="button-row">
           <button *ngIf="isLoggedIn && userRole === 'admin'" mat-button class="button-text" routerLink="productAlert">Alertas</button>
-          <button *ngIf="isLoggedIn && userRole === 'admin'" mat-button class="button-text" routerLink="manageUsers">Usuarios</button>
+          <button *ngIf="isLoggedIn && userRole === 'admin'" mat-button class="button-text" routerLink="main">Admin</button>
+          <!-- <button *ngIf="isLoggedIn && userRole === 'admin'" mat-button class="button-text" routerLink="main">Admin</button> Este es para logicts--> 
           <button mat-button class="button-text" routerLink="product-list">Productos</button>
           <button *ngIf="!isLoggedIn" mat-button class="button-text" routerLink="/register">Registrarse</button>
           <button *ngIf="isLoggedIn" mat-button class="button-text" routerLink="wishlist">Wishlist</button>

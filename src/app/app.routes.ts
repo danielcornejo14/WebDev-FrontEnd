@@ -19,6 +19,7 @@ import { WishlistComponent } from './shared/pages/wishlist/wishlist.component';
 import { ProductAlertComponent } from './shared/pages/product-alert/product-alert.component';
 import { OrderDashboardComponent } from './order/order-dashboard/order-dashboard.component';
 import { OrderDetailsComponent } from './order/order-details/order-details.component';
+import { StatsComponent } from './admin/stats/stats.component';
 
 export const routes: Routes = [
   {
@@ -33,10 +34,8 @@ export const routes: Routes = [
       { path: 'wishlist', component: WishlistComponent },
       { path: 'cart', component: CartPageComponent },
       {path: 'productAlert', component: ProductAlertComponent},
-      {
-        path: 'manageUsers',
-        component: ManageUsersComponent,
-      },
+      {path: 'main',component: MainComponent,},
+      // {path: 'manageUsers',component: ManageUsersComponent,},
       
       { path: '**', redirectTo: 'landing' },
     ],
@@ -68,6 +67,14 @@ export const routes: Routes = [
       {
         path: 'orderDetail',
         component: OrderDetailsComponent
+      },
+      {
+        path: 'stats',
+        component: StatsComponent,
+      },
+      {
+        path: 'manageUsers',
+        component: ManageUsersComponent,
       }
     ],
   },
