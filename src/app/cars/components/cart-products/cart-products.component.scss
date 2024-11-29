@@ -1,0 +1,41 @@
+mat-card {
+  margin: 10px 0;
+  padding: 10px;
+  width: 100%; /* Hace que el card ocupe todo el ancho disponible */
+  max-height: 150px; /* Ajusta la altura máxima */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+mat-card-header {
+  flex: 1;
+}
+
+mat-card-title {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+mat-card-subtitle {
+  font-size: 0.9em;
+  color: gray;
+}
+
+mat-card-content {
+  flex: 2;
+  margin-top: 10px;
+}
+
+mat-card-actions {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+mat-card img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-right: 20px;
+}

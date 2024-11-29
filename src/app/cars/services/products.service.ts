@@ -25,7 +25,6 @@ export class ProductsService {
   }
 
   getProductById(id: number | string): Observable<Product> {
-    console.log(id);
     if (!id) {
       throw Error('El id del producto es necesario');
     }

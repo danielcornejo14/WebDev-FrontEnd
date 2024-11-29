@@ -1,0 +1,19 @@
+<div class="cart-summary">
+  <h5>Información de Cobro</h5>
+  <div *ngFor="let item of cartItems">
+    <p>
+      {{item.product.name}} - 
+      <span *ngIf="item.product.discount !== 0">
+        {{(item.product.price * item.product.discount) | currency}}
+      </span>
+      <span *ngIf="item.product.discount === 0">
+        {{item.product.price | currency}}
+      </span>
+      x {{item.quantity}}
+    </p>
+  </div>
+  <p>Impuestos: {{tax | currency}}</p>
+  <mat-divider></mat-divider>
+  <h6>Total: {{total | currency}}</h6>
+  <button mat-raised-button color="primary" (click)="onProceedToShipping()">Proceder a Envio</button>
+</div>
