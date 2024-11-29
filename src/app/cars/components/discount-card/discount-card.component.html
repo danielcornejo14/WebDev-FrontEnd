@@ -15,7 +15,7 @@
 
       <ng-template pTemplate="content">
         <p class="original-price">Original Price: ${{ product.price }}</p>
-        <p class="discounted-price">Discounted Price: ${{ product.price * 0.5 }}</p>
+        <p class="discounted-price">Discounted Price: ${{ product.price - (product.price * product.discount) }} </p>
       </ng-template>
       
     </p-card>

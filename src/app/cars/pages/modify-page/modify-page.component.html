@@ -25,6 +25,12 @@
       <div *ngIf="isFieldInvalid('price')" class="error-message">Precio es requerido y debe ser mayor o igual a 0</div>
     </div>
 
+    <div class="form-group" [ngClass]="{'has-error': isFieldInvalid('discount')}">
+      <label for="price">Descuento</label>
+      <input type="number" id="discount" formControlName="discount" required>
+      <div *ngIf="isFieldInvalid('discount')" class="error-message">Precio es requerido y debe ser mayor o igual a 0</div>
+    </div>
+
     <div class="form-group" [ngClass]="{'has-error': isFieldInvalid('image')}">
       <label for="image">URL de la Imagen</label>
       <input type="text" id="image" formControlName="image" required>

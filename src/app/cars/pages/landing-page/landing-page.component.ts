@@ -28,6 +28,7 @@ import { Router } from '@angular/router';
 })
 export class LandingPageComponent implements OnInit {
   public products: Product[] = [];
+  public discountProducts: Product[] = [];
   public categories: Category[] = [];
   public numVisible: number = 3;
 
@@ -45,6 +46,7 @@ export class LandingPageComponent implements OnInit {
   loadProducts(): void {
     this.productsService.getProducts().subscribe(products => {
       this.products = products;
+      this.discountProducts = products.filter(product => product.discount > 0);
     });
   }
 
