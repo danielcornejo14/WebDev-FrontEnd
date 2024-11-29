@@ -1,7 +1,7 @@
 <!-- Fondo del modal y contenedor -->
 <div class="modal-overlay" *ngIf="showForm">
     <div class="modal-content">
-      <button class="modal-close" (click)="closeModal()" routerLink="/users/manageUsers" routerLinkActive="active">×</button>
+      <button class="modal-close" (click)="closeModal()">×</button>
       <h2>{{ user._id ? 'Editar Usuario' : 'Agregar Usuario' }}</h2>
       <form (ngSubmit)="submitForm()">
         <!-- <label>Nombre:</label>

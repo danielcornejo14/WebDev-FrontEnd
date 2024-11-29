@@ -26,7 +26,7 @@
         <div class="button-row">
           <button *ngIf="isLoggedIn && userRole === 'admin'" mat-button class="button-text" routerLink="productAlert">Alertas</button>
           <button *ngIf="isLoggedIn && userRole === 'admin'" mat-button class="button-text" routerLink="main">Admin</button>
-          <!-- <button *ngIf="isLoggedIn && userRole === 'admin'" mat-button class="button-text" routerLink="main">Admin</button> Este es para logicts--> 
+          <button *ngIf="isLoggedIn && userRole === 'logistics'" mat-button class="button-text" routerLink="pedidos">Pedidos</button>  <!--Este es para logicts--> 
           <button mat-button class="button-text" routerLink="product-list">Productos</button>
           <button *ngIf="!isLoggedIn" mat-button class="button-text" routerLink="/register">Registrarse</button>
           <button *ngIf="isLoggedIn" mat-button class="button-text" routerLink="wishlist">Wishlist</button>
@@ -34,6 +34,8 @@
           <button *ngIf="isLoggedIn && userRole === 'admin'" mat-button class="button-text" routerLink="sell">Vender</button>
           <button *ngIf="isLoggedIn" mat-button class="button-text" (click)="logout()">Logout</button>
           <button *ngIf="!isLoggedIn" mat-button class="button-text" routerLink="/login">Login</button>
+          <button *ngIf="isLoggedIn" mat-button class="button-text" (click)="editUser.emit()" id="btn-edit">Editar Perfil</button>
+          <button *ngIf="isLoggedIn" mat-button class="button-text" (click)="editUser.emit()" id="btn-edit">Eliminar cuenta</button>
         </div>
 
         <button mat-icon-button class="mobile-menu-button" (click)="sidenav.toggle()">

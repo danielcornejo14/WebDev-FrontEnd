@@ -1,5 +1,6 @@
+import { User } from './../../../cars/models/users/user';
 import { Product } from './../../../cars/models/products/product';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
@@ -11,6 +12,7 @@ import { AuthService } from './../../../cars/services/auth.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { ProductsService } from '../../../cars/services/products.service';
+
 
 @Component({
   selector: 'app-nav-menu',
@@ -31,6 +33,7 @@ import { ProductsService } from '../../../cars/services/products.service';
 export class NavMenuComponent {
   isLoggedIn: boolean = false;
   userRole: string | null = null;
+  @Output() editUser = new EventEmitter<User>();
   Product: Product[] = [];
   productNames: string[] = [];
 
@@ -56,6 +59,9 @@ export class NavMenuComponent {
     this.userRole = null;
     this.routerLink.navigate(['/home/landing']);
     
+  }
+  onEdit(user: User): void {
+    this.editUser.emit(user);
   }
 
   loadProducts(): void {

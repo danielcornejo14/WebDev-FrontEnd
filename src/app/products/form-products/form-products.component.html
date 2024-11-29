@@ -1,6 +1,7 @@
 <div class="modal-overlay">
 <div class="product-form">
     <h2>{{ product ? 'Editar Producto' : 'Agregar Producto' }}</h2>
+    <!-- <button class="modal-close" (click)="closeModal()" routerLink="/products/manageProducts" routerLinkActive="active">×</button> -->
     <form (ngSubmit)="submitForm()">
       <label>Nombre:</label>
       <input type="text" [(ngModel)]="product.name" name="nombre" required />
@@ -18,14 +19,14 @@
       <input type="number" [(ngModel)]="product.price" name="precio" required />
 
       <label>Descuento:</label>
-      <input type="number" [(ngModel)]="product.price" name="precio" required />
+      <input type="number" [(ngModel)]="product.discount" name="discount" required />
   
       <label>Imagen:</label>
       <input type="text" [(ngModel)]="product.image[0]" name="imagen" required />
   
       <div class="form-actions">
-        <button type="submit">{{ product ? 'Actualizar' : 'Agregar' }}</button>
-        <button type="button">Cancelar</button>
+        <button type="submit" (click)="submitForm()">{{ product ? 'Actualizar' : 'Agregar' }}</button> 
+        <button type="button" (click)="closeModal()">Cancelar</button>
       </div>
     </form>
   </div>
