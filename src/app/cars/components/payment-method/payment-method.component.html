@@ -1,0 +1,32 @@
+<form [formGroup]="formGroup" (ngSubmit)="proceedToReview.emit()">
+    <mat-form-field appearance="fill">
+        <mat-label>Card Number</mat-label>
+        <input matInput placeholder="Enter your card number" formControlName="cardNumber" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Cardholder Name</mat-label>
+        <input matInput placeholder="Enter cardholder name" formControlName="cardName" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Expiration Date</mat-label>
+        <input matInput placeholder="MM/YY" formControlName="expiryDate" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>CVV</mat-label>
+        <input matInput placeholder="Enter CVV" formControlName="cvv">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Metodo de Pago</mat-label>
+        <mat-select formControlName="paymentMethod" required>
+            <mat-option value="credit">Credit Card</mat-option>
+            <mat-option value="paypal">PayPal</mat-option>
+            <mat-option value="googlepay">Google Pay</mat-option>
+            <mat-option value="applepay">Apple Pay</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Revisar Pedido</button>
+</form>

@@ -17,6 +17,9 @@ import { Cart } from '../../models/cart/Cart';
 import { CartProductsComponent } from "../../components/cart-products/cart-products.component";
 import { CartSummaryComponent } from "../../components/cart-summary/cart-summary.component";
 import { ShippingFormComponent } from "../../components/shipping-form/shipping-form.component";
+import { PaymentMethodComponent } from "../../components/payment-method/payment-method.component";
+import { ReviewOrderComponent } from '../../components/review-order/review-order.component';
+
 
 @Component({
   selector: 'app-cart-page',
@@ -33,15 +36,17 @@ import { ShippingFormComponent } from "../../components/shipping-form/shipping-f
     MatDividerModule,
     MatStepperModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    PaymentMethodComponent,
+    ReviewOrderComponent
   ],
   templateUrl: './cart-page.component.html',
   styleUrls: ['./cart-page.component.scss']
 })
 export class CartPageComponent implements OnInit {
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
-  thirdFormGroup: FormGroup;
+  cartFormGroup: FormGroup;
+  shippingFormGroup: FormGroup;
+  cardFormGroup: FormGroup;
   cart: Cart = {} as Cart;
   cartItems: { product: Product, quantity: number }[] = [];
   productList: Product[] = [];
@@ -54,23 +59,26 @@ export class CartPageComponent implements OnInit {
     private productService: ProductsService,
   ) {
 
-    this.firstFormGroup = this._formBuilder.group({});
-    this.secondFormGroup = this._formBuilder.group({
+    this.cartFormGroup = this._formBuilder.group({});
+
+    this.shippingFormGroup = this._formBuilder.group({
       name: ['', Validators.required],
       address: ['', Validators.required],
       city: ['', Validators.required],
-      postalCode: ['', Validators.required]
+      postalCode: ['', [Validators.required, Validators.pattern('^[0-9]+$')]]
     });
-    this.thirdFormGroup = this._formBuilder.group({
-      name: ['', Validators.required],
-      address: ['', Validators.required],
-      city: ['', Validators.required],
-      postalCode: ['', Validators.required]
+
+    this.cardFormGroup = this._formBuilder.group({
+      cardNumber: ['', [Validators.required, Validators.pattern('^[0-9]{16}$')]],
+      cardName: ['', Validators.required],
+      expiryDate: ['', [Validators.required, Validators.pattern('^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$')]],
+      cvv: ['', [Validators.required, Validators.pattern('^[0-9]{3}$')]],
+      paymentMethod: ['', [Validators.required, Validators.pattern('^(credit|paypal|googlepay|applepay)$')]]
     });
   }
   
   ngOnInit(): void {
-    this.firstFormGroup = this._formBuilder.group({});
+    this.cartFormGroup = this._formBuilder.group({});
     this.loadCart();
   }
 
@@ -124,9 +132,14 @@ export class CartPageComponent implements OnInit {
     }, 0);
   }
   
-  proceedToCheckout(): void {
-    // Lógica para proceder al pago
-    console.log('Proceder al pago');
+  onPlaceOrder(): void {
+  if (this.shippingFormGroup.valid && this.cardFormGroup.valid) {
+      this.cartService.checkout(this.cardFormGroup.value.paymentMethod).subscribe(() => {
+        console.log('Order placed successfully');
+            }, error => {
+        console.error('Error placing order:', error);
+      });
+    }
   }
 
   nextStep(stepper: any): void {

@@ -7,13 +7,14 @@
     <input matInput placeholder="Dirección" formControlName="address">
     <mat-error *ngIf="isFieldInvalid('address')">Este campo es obligatorio</mat-error>
   </mat-form-field>
+  
   <mat-form-field>
     <input matInput placeholder="Ciudad" formControlName="city">
     <mat-error *ngIf="isFieldInvalid('city')">Este campo es obligatorio</mat-error>
   </mat-form-field>
   <mat-form-field>
     <input matInput placeholder="Código Postal" formControlName="postalCode">
-    <mat-error *ngIf="isFieldInvalid('postalCode')">Este campo es obligatorio</mat-error>
+    <mat-error *ngIf="isFieldInvalid('postalCode')">Este campo es obligatorio y solo deben ir numeros</mat-error>
   </mat-form-field>
   <button mat-raised-button color="primary" [disabled]="formGroup.invalid" (click)="onProceedToPayment()">Proceder al Pago</button>
 </div>

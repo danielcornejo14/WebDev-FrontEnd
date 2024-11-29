@@ -1,6 +1,6 @@
 <mat-vertical-stepper linear #stepper>
-  <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup">
+  <mat-step [stepControl]="cartFormGroup">
+    <form [formGroup]="cartFormGroup">
       <ng-template matStepLabel>Carrito de Compras</ng-template>
       <div class="cart-container">
         <div class="cart-items">
@@ -16,17 +16,26 @@
     </form>
   </mat-step>
 
-  <mat-step [stepControl]="secondFormGroup">
-    <form [formGroup]="secondFormGroup">
+  <mat-step [stepControl]="shippingFormGroup">
+    <form [formGroup]="shippingFormGroup">
       <ng-template matStepLabel>Información de Envío</ng-template>
-      <app-shipping-form [formGroup]="secondFormGroup" (proceedToPayment)="nextStep(stepper)"></app-shipping-form>
+      <app-shipping-form [formGroup]="shippingFormGroup" (proceedToPayment)="nextStep(stepper)"></app-shipping-form>
     </form>
   </mat-step>
 
-  <mat-step [stepControl]="thirdFormGroup">
-    <form [formGroup]="thirdFormGroup">
+  <mat-step [stepControl]="cardFormGroup">
+    <form [formGroup]="cardFormGroup">
       <ng-template matStepLabel>Información de Pago</ng-template>
+      <app-payment-method [formGroup]="cardFormGroup" (proceedToReview)="nextStep(stepper)"></app-payment-method>
     </form>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Finalizar Pedido</ng-template>
+    <app-review-order [cartItems]="cartItems" [tax]="tax" [total]="total" [shipping]="shippingFormGroup" [payment]="cardFormGroup"></app-review-order>
+    <div>
+      <button mat-raised-button color="primary" (click)="onPlaceOrder()">Realizar Pedido</button>
+    </div>
   </mat-step>
 
 </mat-vertical-stepper>
