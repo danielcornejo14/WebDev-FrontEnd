@@ -18,11 +18,16 @@ import { Product } from '../../models/products/product';
 })
 export class CartSummaryComponent {
   @Input() cartItems: { product: Product, quantity: number }[] = [];
-  @Input() tax: number = 0;
-  @Input() total: number = 0;
+  @Input() tax: number = 5;
+  @Input() total: number = this.tax;
   @Output() proceedToShipping = new EventEmitter<void>();
 
   onProceedToShipping(): void {
-    this.proceedToShipping.emit();
+    if (this.cartItems.length > 0) {
+      this.proceedToShipping.emit();
+    }
+    else {
+      alert('No hay productos en el carrito');
+    }
   }
 }

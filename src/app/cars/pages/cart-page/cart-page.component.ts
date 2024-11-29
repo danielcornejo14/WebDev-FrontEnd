@@ -131,9 +131,9 @@ export class CartPageComponent implements OnInit {
     // Recalcula el total
     this.total = this.cartItems.reduce((acc, item) => {
       if (item.product.discount !== 0) {
-        return acc + (item.product.price * item.product.discount) * item.quantity;
+        return acc + (item.product.price * item.product.discount) * item.quantity + this.tax;
       } else {
-        return acc + item.product.price * item.quantity;
+        return acc + item.product.price * item.quantity + this.tax;
       }
     }, 0);
   }

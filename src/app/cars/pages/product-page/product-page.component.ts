@@ -17,6 +17,7 @@ import { AuthService } from '../../services/auth.service';
 import { ProductsService } from '../../services/products.service';
 import { WishlistService } from '../../../shared/services/wishlist.service';
 import { CartService } from '../../services/cart.service';
+import { MightLikeComponent } from "../../components/might-like/might-like.component";
 
 @Component({
   selector: 'app-product-page',
@@ -27,7 +28,8 @@ import { CartService } from '../../services/cart.service';
     FormsModule,
     ButtonModule,
     NewReviewComponent,
-    PostedReviewComponent
+    PostedReviewComponent,
+    MightLikeComponent
 ],
   templateUrl: './product-page.component.html',
   styleUrl: './product-page.component.scss'
