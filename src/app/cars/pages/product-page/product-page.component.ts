@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,6 +13,7 @@ import { PostedReviewComponent } from '../../components/posted-review/posted-rev
 import { Review } from '../../models/products/review';
 import { ReviewService } from '../../services/review.service';
 import { AuthService } from '../../services/auth.service';
+import { WishlistService } from '../../../shared/services/wishlist.service';
 
 @Component({
   selector: 'app-product-page',
@@ -29,6 +30,9 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './product-page.component.scss'
 })
 export class ProductPageComponent {
+
+
+  wishlistService: WishlistService = inject(WishlistService);
 
   product!: Product;
 
@@ -80,6 +84,11 @@ export class ProductPageComponent {
 
   editProduct(){
     this.routerLink.navigate(['/home/modify-product', this.product.id]);
+  }
+
+  onAddToWishlist(): void {
+    this.wishlistService.addToWishlist(this.product);
+    alert('Producto agregado a la lista de deseos');
   }
 
   addToCart(): void {

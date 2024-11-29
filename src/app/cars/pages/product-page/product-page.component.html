@@ -14,8 +14,9 @@
         <p>Price: ${{ product.price }}</p>
         <p>Brand: {{ product.brand }}</p>
         <p>Rating: <p-rating [(ngModel)]="rating" [readonly]="true" [cancel]="false"></p-rating></p>
-        <div>
+        <div class="action-container">
           <button pButton type="button" label="Add to Cart" icon="pi pi-shopping-cart" class="small-green-button" (click)="addToCart()"></button>
+          <button pButton type="button" label="Add to Wishlist" icon="pi pi-star" class="small-yellow-button" (click)="onAddToWishlist()"></button>
         </div>
 
         <div *ngIf="userRole === 'admin'">
