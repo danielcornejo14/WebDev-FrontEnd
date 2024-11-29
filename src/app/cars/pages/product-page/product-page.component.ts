@@ -6,13 +6,15 @@ import { FormsModule } from '@angular/forms';
 import { RatingModule } from 'primeng/rating';
 import { ButtonModule } from 'primeng/button';
 
-import { ProductsService } from '../../services/products.service';
 import { Product } from '../../models/products/product';
+import { Review } from '../../models/products/review';
+
 import { NewReviewComponent } from "../../components/new-review/new-review.component";
 import { PostedReviewComponent } from '../../components/posted-review/posted-review.component';
-import { Review } from '../../models/products/review';
+
 import { ReviewService } from '../../services/review.service';
 import { AuthService } from '../../services/auth.service';
+import { ProductsService } from '../../services/products.service';
 
 @Component({
   selector: 'app-product-page',

@@ -1,1 +1,34 @@
-<p>cart-page works!</p>
+<div class="cart-container">
+    <div class="cart-items">
+      <p-dataView [value]="productList" layout="grid" emptyMessage="No has agregado productos a tu carrito">
+        <ng-template let-product pTemplate="item">
+          <div class="cart-item">
+            <p-card [header]="product.name" [subheader]="product.category">
+              <ng-template pTemplate="content">
+                <div class="product-detail">
+                  <div class="item-image">
+                    <img [src]="product.image" alt="{{product.name}}">
+                  </div>
+                  <div class="item-details">
+                    <h4>{{product.name}}</h4>
+                    <p>{{product.description}}</p>
+                    <h5>{{product.price | currency}}</h5>
+                  </div>
+                </div>
+              </ng-template>
+              <ng-template pTemplate="footer">
+                <button pButton type="button" label="Remove" icon="pi pi-times"></button>
+              </ng-template>
+            </p-card>
+          </div>
+        </ng-template>
+      </p-dataView>
+    </div>
+  
+    <!-- Columna derecha: Información de cobros -->
+    <div class="cart-summary">
+      <h5>Información de Cobro</h5>
+      <p>Total: {{total | currency}}</p>
+      <button pButton type="button" label="Proceder al Pago" icon="pi pi-credit-card"></button>
+    </div>
+  </div>
