@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-//import { Chart, registerables } from 'chart.js';
-//Chart.register(...registerables);
+import { Chart, registerables } from 'chart.js';
+Chart.register(...registerables);
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
 export class StatsComponent implements AfterViewInit{
 
   activeTab = 'products';
-  //charts: { [key: string]: Chart } = {};
+  charts: { [key: string]: Chart } = {};
   
   metrics = [
     {
@@ -79,12 +79,12 @@ export class StatsComponent implements AfterViewInit{
   ];
 
   ngAfterViewInit() {
-    //this.initializeCharts();
+    this.initializeCharts();
   }
 
   setActiveTab(tabId: string) {
     this.activeTab = tabId;
-    //this.updateChart(tabId);
+    this.updateChart(tabId);
   }
 
   onPeriodChange(event: Event) {
@@ -199,7 +199,7 @@ export class StatsComponent implements AfterViewInit{
     //this.updateChart(this.activeTab);
   }
 
-  /*private initializeCharts() {
+  private initializeCharts() {
    // Productos más vendidos - Gráfico de barras
    const productsChartElement = document.getElementById('productsChart') as HTMLCanvasElement;
     if (productsChartElement) {
@@ -289,5 +289,5 @@ export class StatsComponent implements AfterViewInit{
       // Trigger chart update
       this.charts[tabId].update();
     }
-  }*/
+  }
 }
