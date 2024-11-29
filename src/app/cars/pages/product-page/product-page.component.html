@@ -34,7 +34,7 @@
     
     <div class="product-additional-info">
       <h5>Tambien te puede interesar</h5>
-      <p>Detalles tecnicos TODO</p>
+      <app-might-like [categoryName]="product.category.name"></app-might-like>
     </div>
     
     <app-new-review [productId]="product.id" *ngIf="isLoggedIn"></app-new-review>

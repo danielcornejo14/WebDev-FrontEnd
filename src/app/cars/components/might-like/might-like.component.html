@@ -1,0 +1,7 @@
+<p-carousel [value]="products" [numVisible]="3" [numScroll]="1" [circular]="true">
+    <ng-template pTemplate="item" let-item>
+        <div class="carousel-item">
+            <app-featured-card [product]="item" [isIntrested]="true"></app-featured-card>
+        </div>
+    </ng-template>
+</p-carousel>

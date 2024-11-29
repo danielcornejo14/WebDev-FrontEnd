@@ -27,6 +27,9 @@ export class FeaturedCardComponent {
   @Input()
   public product!: Product;
 
+  @Input()
+  public isIntrested: boolean = false;
+
   value: number = 0;
 
   ngOnInit(): void {
@@ -38,6 +41,13 @@ export class FeaturedCardComponent {
   }
   
   navigateToProduct(): void {
-    this.router.navigate(['/home/product-list', this.product.id]);
+    if(!this.isIntrested){
+      this.router.navigate(['/home/product-list', this.product.id]);
+    }
+    else{
+      this.router.navigate(['/home/product-list', this.product.id]).then(() => {
+        window.location.reload();
+      });
+    }
   }
 }
