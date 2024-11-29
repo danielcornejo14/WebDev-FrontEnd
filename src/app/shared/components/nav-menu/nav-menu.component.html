@@ -24,6 +24,8 @@
         <span class="spacer"></span>
 
         <div class="button-row">
+          <!-- <button mat-button class="button-text" routerLink="product-list">Alertas</button> -->
+          <button mat-button class="button-text" [routerLink]="['/users','manageUsers']">Usuarios</button>
           <button mat-button class="button-text" routerLink="product-list">Productos</button>
           <button *ngIf="!isLoggedIn" mat-button class="button-text" routerLink="/register">Registrarse</button>
           <button *ngIf="isLoggedIn" mat-button class="button-text" routerLink="cart">Cart</button>

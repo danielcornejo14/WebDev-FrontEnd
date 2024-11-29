@@ -26,15 +26,15 @@ export const routes: Routes = [
       { path: 'sell', component: SellPageComponent },
       { path: 'modify-product/:id', component: ModifyPageComponent },
       { path: '**', redirectTo: 'landing' },
-    ]
+    ],
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
   },
   {
     path: 'register',
-    component: RegisterComponent
+    component: RegisterComponent,
   },
 
   {
@@ -42,47 +42,47 @@ export const routes: Routes = [
     children: [
       {
         path: 'main',
-        component: MainComponent
+        component: MainComponent,
       },
       {
         path: 'dashboard',
-        component: DashboardComponent
+        component: DashboardComponent,
       },
-    ]
+    ],
   },
   {
     path: 'users',
     children: [
       {
         path: 'addUser',
-        component: FormUserComponent
+        component: FormUserComponent,
       },
       {
         path: 'manageUsers',
-        component: ManageUsersComponent
+        component: ManageUsersComponent,
       },
       {
         path: 'editUser',
-        component: FormUserComponent
-      }
-    ]
+        component: FormUserComponent,
+      },
+    ],
   },
   {
     path: 'products',
     children: [
       {
         path: 'addProduct',
-        component: FormProductsComponent
+        component: FormProductsComponent,
       },
       {
         path: 'manageProducts',
-        component: ManageProductsComponent
+        component: ManageProductsComponent,
       },
       {
         path: 'editProduct',
-        component: FormProductsComponent
-      }
-    ]
+        component: FormProductsComponent,
+      },
+    ],
   },
   {
     path: '404',
@@ -91,10 +91,10 @@ export const routes: Routes = [
   {
     path: '',
     redirectTo: 'home',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: '**',
     redirectTo: '404',
-  }
+  },
 ];
