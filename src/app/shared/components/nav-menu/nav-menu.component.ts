@@ -23,7 +23,7 @@ import { Router } from '@angular/router';
     MatListModule,
     RouterModule,
     SearchBoxComponent,
-    CommonModule
+    CommonModule,
 ],
   templateUrl: './nav-menu.component.html',
   styleUrl: './nav-menu.component.scss'

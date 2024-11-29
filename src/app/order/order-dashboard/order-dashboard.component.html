@@ -1,7 +1,7 @@
 <div class="container">
   <h1>Gestión de Pedidos</h1>
   <div class="search-bar">
-    <input type="text" placeholder="Buscar por estado del pedido..." id="searchUser" (keyup.enter)="ngOnChanges(textInput.value)" #textInput />
+    <input type="text" placeholder="Buscar por estado del pedido..." id="searchUser" (keyup.enter)="onSearch(textInput.value)" #textInput />
   </div>
 
   <div class="dashboard">
@@ -28,7 +28,7 @@
   </div>
 
 
-   <app-order-list></app-order-list> 
+   <app-order-list [orders]="filterOrders"></app-order-list> 
 
   
 
