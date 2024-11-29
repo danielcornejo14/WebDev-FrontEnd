@@ -14,7 +14,7 @@ export class UsersService {
   private createAuthHeaders(): HttpHeaders {
     const token = localStorage.getItem('token');
     return new HttpHeaders({
-      'Authorization': `Bearer ${token}`
+      'Authorization': `${token}`
     });
   }
 
@@ -52,16 +52,20 @@ export class UsersService {
   }
 
   updateUser(user: User): Observable<User> {
-    if (!user.id) {
+    if (!user._id && !user.id) {
       throw Error('El id del usuario es necesario');
     }
     const headers = this.createAuthHeaders();
-    return this.http.patch<User>(`${this.apiUrl}/updateUser/${user.id}`, user, { headers });
+    const userId = user._id || user.id;
+    user.id = userId;
+
+    return this.http.put<User>(`${this.apiUrl}/updateUser`, user, { headers });
   }
 
   deleteUser(id: number | string): Observable<boolean> {
     const headers = this.createAuthHeaders();
-    return this.http.delete<boolean>(`${this.apiUrl}/deleteUser/${id}`, { headers })
+    console.log('id', id);
+    return this.http.delete<boolean>(`${this.apiUrl}/deleteUser`, { headers, params: { id: id.toString() } })
       .pipe(
         map(resp => true),
         catchError(error => of(false))

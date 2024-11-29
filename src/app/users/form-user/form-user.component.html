@@ -2,7 +2,7 @@
 <div class="modal-overlay" *ngIf="showForm">
     <div class="modal-content">
       <button class="modal-close" (click)="closeModal()" routerLink="/users/manageUsers" routerLinkActive="active">×</button>
-      <h2>{{ user.id ? 'Editar Usuario' : 'Agregar Usuario' }}</h2>
+      <h2>{{ user._id ? 'Editar Usuario' : 'Agregar Usuario' }}</h2>
       <form (ngSubmit)="submitForm()">
         <!-- <label>Nombre:</label>
         <input type="text" [(ngModel)]="user." name="nombre" required />
@@ -26,8 +26,8 @@
           <option value="logistics">Logístico</option>
         </select>
   
-        <button type="submit" (click)="submitForm()" routerLink="/users/manageUsers" routerLinkActive="active">Guardar</button>
-        <button type="button" (click)="closeModal()" routerLink="/users/manageUsers" routerLinkActive="active">Cancelar</button>
+        <button type="submit" (click)="submitForm()">Guardar</button>
+        <button type="button" (click)="closeModal()">Cancelar</button>
       </form>
     </div>
   </div>

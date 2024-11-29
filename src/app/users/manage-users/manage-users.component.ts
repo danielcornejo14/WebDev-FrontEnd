@@ -16,6 +16,7 @@ import { FormUserComponent } from "../form-user/form-user.component";
   styleUrl: './manage-users.component.scss'
 })
 export class ManageUsersComponent implements OnInit {
+
   users: User[] = [];
   filteredUsers: User[] = [];
   searchTerm: string = '';
@@ -26,13 +27,14 @@ export class ManageUsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.usersService.getAllUsers().subscribe(users => {
+      
       this.users = users;
       this.filteredUsers = users;
     });
   }
 
   saveUser(user: User): void {
-    if (user.id) {
+    if (user._id) {
       this.usersService.updateUser(user).subscribe((updatedUser: User) => {
         const index = this.users.findIndex(u => u.id === updatedUser.id);
         if (index !== -1) {
@@ -46,21 +48,40 @@ export class ManageUsersComponent implements OnInit {
         this.filteredUsers = [...this.users];
       });
     }
-    this.showForm = false;
+    this.selectedUser = null;
+    window.location.reload();
   }
 
-  deleteUser(id: number): void {
-    this.usersService.deleteUser(id.toString()).subscribe(success => {
+  deleteUser(id: number | string): void {
+    this.usersService.deleteUser(id).subscribe(success => {
       if (success) {
         this.users = this.users.filter(user => user.id !== id);
         this.filteredUsers = [...this.users];
       }
     });
+    window.location.reload();
+
   }
 
-  editUser(user: User): void {
+  onEditUser(user: User): void {
     this.selectedUser = { ...user };
     this.showForm = true;
+  }
+
+  onNewUser() {
+    const newUser: User = {
+      id: '',
+      email: '',
+      password: '',
+      role: 'customer',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+    this.selectedUser = newUser;
+  }
+
+  closeForm(): void {
+    this.selectedUser = null;
   }
 
   ngOnChanges(value: string): void {

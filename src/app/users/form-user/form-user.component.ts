@@ -20,7 +20,9 @@ export class FormUserComponent {
   @Output() close = new EventEmitter<void>();
 
   showForm: boolean = true; // Indica si el modal está visible
-
+  ngOnInit(): void {
+    console.log('user', this.user);
+  }
   // Abre el formulario modal
   openForm(user?: any): void {
     this.user = user || {}; // Si se pasa un usuario, se edita, si no, es nuevo
@@ -29,12 +31,11 @@ export class FormUserComponent {
 
   // Cierra el formulario modal
   closeModal(): void {
-    this.showForm = false;
+    this.close.emit();
   }
 
   submitForm(): void {
     this.saveUser.emit(this.user);
-    this.close.emit();
   }
 
   

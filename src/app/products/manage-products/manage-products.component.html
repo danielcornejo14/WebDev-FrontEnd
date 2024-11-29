@@ -11,11 +11,12 @@
       (editProduct)="editProduct($event)" 
       (deleteProduct)="deleteProduct($event)">
     </app-table-products>
-  
-    <app-form-products
-      *ngIf="showForm" 
-      [product | null]="selectedProduct" 
+    @if(selectedProduct){
+      <app-form-products
+      [product]="selectedProduct" 
       (closeForm)="closeForm()">
     </app-form-products>
+    }
+
   </div>
   

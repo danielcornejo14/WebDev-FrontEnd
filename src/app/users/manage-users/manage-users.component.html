@@ -2,20 +2,19 @@
     <h1>Gestión de Usuarios</h1>
     <div class="search-bar">
       <input type="text" placeholder="Buscar usuarios..."   (keyup.enter)="ngOnChanges(textInput.value)" id="searchUser" #textInput/>
-      <button routerLink="/users/addUser" routerLinkActive="active" >Agregar Usuario</button>
+      <button (click)="onNewUser()" >Agregar Usuario</button>
     </div>
 
     <app-table-users 
         [users]="filteredUsers" 
-      (editUser)="editUser($event)" 
+      (editUser)="onEditUser($event)" 
       (deleteUser)="deleteUser($event)"></app-table-users>
 
-
-      <app-form-user *ngIf="showForm"
-        [user | null ]="selectedUser"
+    @if(selectedUser){
+      <app-form-user 
+        [user]="selectedUser" 
         (saveUser)="saveUser($event)" 
-        (close)="showForm = false">
-      </app-form-user>
-
+        (close)="closeForm()"></app-form-user>
+    }
   </div>
   

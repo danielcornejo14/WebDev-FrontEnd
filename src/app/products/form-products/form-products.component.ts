@@ -10,19 +10,41 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-form-products',
   standalone: true,
-  imports: [CommonModule,FormsModule,RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './form-products.component.html',
-  styleUrl: './form-products.component.scss'
+  styleUrl: './form-products.component.scss',
 })
 export class FormProductsComponent {
-  @Input() product: Product = { id: 0, name: '' ,brand:  '', description: '',price: 0, image: '', category: { id: 0, name: '', subcategories: [] }, rating: 0,  createdAt: new Date(), updatedAt: new Date() }; 
+  @Input() product: Product = {
+    id: 0,
+    name: '',
+    brand: '',
+    description: '',
+    price: 0,
+    image: '',
+    category: { id: 0, name: '', subcategories: [] },
+    rating: 0,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  };
   @Output() saveProduct = new EventEmitter<Product>();
   @Output() close = new EventEmitter<void>();
 
   showForm: boolean = true;
 
   openForm(product?: Product): void {
-    this.product = product || { id: 0, name: '' ,brand:  '', description: '',price: 0, image: '', category: { id: 0, name: '', subcategories: [] }, rating: 0,  createdAt: new Date(), updatedAt: new Date() }; 
+    this.product = product || {
+      id: 0,
+      name: '',
+      brand: '',
+      description: '',
+      price: 0,
+      image: '',
+      category: { id: 0, name: '', subcategories: [] },
+      rating: 0,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
     this.showForm = true;
   }
 
@@ -35,6 +57,4 @@ export class FormProductsComponent {
     this.saveProduct.emit(this.product);
     this.closeModal();
   }
-
-
 }

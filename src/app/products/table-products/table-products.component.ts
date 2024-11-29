@@ -19,13 +19,13 @@ import { CommonModule } from '@angular/common';
 export class TableProductsComponent {
   @Input() products: Product[] = [];
   @Output() editProduct = new EventEmitter<Product>();
-  @Output() deleteProduct = new EventEmitter<number>();
+  @Output() deleteProduct = new EventEmitter<number | string>();
 
   onEditProduct(product: Product): void {
     this.editProduct.emit(product);
   }
 
-  onDeleteProduct(id: number): void {
+  onDeleteProduct(id: number | string): void {
     this.deleteProduct.emit(id);
   }
 }

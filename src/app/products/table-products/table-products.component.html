@@ -2,7 +2,6 @@
     <thead>
       <tr>
         <th>ID</th>
-        <th>Imagen</th>
         <th>Nombre</th>
         <th>Categoría</th>
         <th>Marca</th>
@@ -13,14 +12,14 @@
     <tbody>
       <tr *ngFor="let product of products">
         <td>{{ product.id }}</td>
-        <td><img [src]="product.image[0]" alt="{{product.name}}" /></td>
         <td>{{ product.name }}</td>
-        <td>{{ product.category }}</td>
+        <td>{{ product.category.name }}</td>
+
         <td>{{ product.brand }}</td>
         <td>${{ product.price.toFixed(2) }}</td>
         <td>
-          <button class="edit-button" (click)="editProduct.emit(product)">✏️</button>
-          <button class="delete-button" (click)="deleteProduct.emit(+product.id)">🗑️</button>
+          <button class="edit-button" (click)="onEditProduct(product)">✏️</button>
+          <button class="delete-button" (click)="onDeleteProduct(product.id)">🗑️</button>
         </td>
       </tr>
     </tbody>

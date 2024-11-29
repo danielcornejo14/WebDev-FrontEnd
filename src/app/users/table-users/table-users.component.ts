@@ -14,13 +14,13 @@ import { RouterModule } from '@angular/router';
 export class TableUsersComponent {
   @Input() users: User[] = [];
   @Output() editUser = new EventEmitter<User>();
-  @Output() deleteUser = new EventEmitter<number>();
+  @Output() deleteUser = new EventEmitter<number | string>();
 
   onEdit(user: User): void {
     this.editUser.emit(user);
   }
 
-  onDelete(id: number): void {
+  onDelete(id: number | string): void {
     this.deleteUser.emit(id);
   }
 }

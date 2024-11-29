@@ -31,18 +31,13 @@ export class ManageProductsComponent implements OnInit{
     });
   }
 
-  openForm(product: Product | null = null): void {
-    this.selectedProduct = product;
-    this.showForm = true;
-  }
-
   closeForm(): void {
-    this.showForm = false;
     this.selectedProduct = null;
   }
 
   editProduct(product: Product): void {
-    this.openForm(product);
+    console.log('product', product);
+    this.selectedProduct = product;
   }
 
   deleteProduct(id: number | string): void {
