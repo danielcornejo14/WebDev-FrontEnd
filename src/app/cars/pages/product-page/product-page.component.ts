@@ -63,7 +63,6 @@ export class ProductPageComponent {
     if(productId){
       this.productService.getProductById(productId)
       .subscribe(product => {
-        console.log(product);
         this.product = product
         this.loadReviews();
       });

@@ -9,12 +9,12 @@ import { Category } from '../models/products/category';
   providedIn: 'root'
 })
 export class CategoriesService {
-  private apiUrl = environment.baserURL;
+  private apiUrl = environment.baserURL + '/category';
 
   constructor(private http: HttpClient) { }
 
   getCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>(`${this.apiUrl}/category`);
+    return this.http.get<Category[]>(`${this.apiUrl}`);
   }
 
 

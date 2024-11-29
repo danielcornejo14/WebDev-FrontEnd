@@ -1,6 +1,8 @@
+import { User } from '../users/user';
+
 export interface Review {
-    productId: string | number; // ObjectId as string
-    user: string; // ObjectId as string
+    productId: string | number;
+    user: User;
     rating: number;
     comment?: string;
     createdAt?: Date;

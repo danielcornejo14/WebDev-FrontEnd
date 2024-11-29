@@ -1,8 +1,8 @@
-import { Product } from "../products/product";
+import { Stock } from "../products/stock";
 
 export interface Cart {
     userId: number;
-    products: Product[];
+    products: Stock[];
     createdAt: Date;
     updatedAt: Date;
 }

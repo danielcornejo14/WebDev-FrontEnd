@@ -1,6 +1,8 @@
-<div class="review">
-    <p><strong>User:</strong> {{ review.user }}</p>
-    <p><strong>Rating:</strong> {{ review.rating }}</p>
-    <p *ngIf="review.comment"><strong>Comment:</strong> {{ review.comment }}</p>
-    <p *ngIf="!review.comment"><strong>Comment:</strong> No comment provided.</p>
-  </div>
+<div class="posted-review">
+  <p><strong>User:</strong> {{ review.user.email }}</p>
+  <p><strong>Rating:</strong> 
+    <p-rating [(ngModel)]="review.rating" [readonly]="true" [cancel]="false"></p-rating>
+  </p>
+  <p *ngIf="review.comment"><strong>Comment:</strong> {{ review.comment }}</p>
+  <p *ngIf="!review.comment"><strong>Comment:</strong> No comment provided.</p>
+</div>

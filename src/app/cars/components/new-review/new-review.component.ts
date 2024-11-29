@@ -35,13 +35,13 @@ export class NewReviewComponent {
   ) {}
 
   submitReview() {
-    /*const newReview: Review = {
+    const newReview: Review = {
       productId: this.productId,
       user: this.authService.getUserDetails().email,
       rating: this.reviewRating,
       comment: this.reviewComment,
     };
-
+ debugger;
     console.log('Submitting review', newReview);
 
     this.reviewService.createReview(newReview).subscribe(
@@ -52,7 +52,7 @@ export class NewReviewComponent {
       (error) => {
         console.error('Error submitting review', error);
       }
-    );*/
+    );
   }
 
 

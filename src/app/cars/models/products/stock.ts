@@ -1,7 +1,8 @@
 export interface Stock {
-    id: number;
+    id: number | string;
     quantity: number;
-    productId: number;
+    productId: number | string;
+    price: number;
     createdAt: Date;
     updatedAt: Date;
 }
