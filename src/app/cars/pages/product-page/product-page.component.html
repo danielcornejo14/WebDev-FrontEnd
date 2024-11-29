@@ -11,11 +11,18 @@
       
         <h1>{{ product.name }}</h1>
         <p class="product-description">{{ product.description }}</p>
-        <p>Price: ${{ product.price }}</p>
+        @if(product.discount > 0){
+          <p>Price: ${{ product.price }} <span class="discount-price">-{{ product.discount * 100 }}%</span></p>
+        }
+        @else
+        {
+          <p>Price: ${{ product.price }}</p>
+        }
         <p>Brand: {{ product.brand }}</p>
         <p>Rating: <p-rating [(ngModel)]="rating" [readonly]="true" [cancel]="false"></p-rating></p>
-        <div>
+        <div class="action-container">
           <button pButton type="button" label="Add to Cart" icon="pi pi-shopping-cart" class="small-green-button" (click)="addToCart()"></button>
+          <button pButton type="button" label="Add to Wishlist" icon="pi pi-star" class="small-yellow-button" (click)="onAddToWishlist()"></button>
         </div>
 
         <div *ngIf="userRole === 'admin'">

@@ -25,17 +25,17 @@ export class CartService {
     return this.http.get<Cart>(`${this.apiUrl}`, { headers });
   }
 
-  addProductToCart(userId: string, productId: string, quantity: number): Observable<any> {
+  addProductToCart(productId: string | number , quantity: number): Observable<any> {
     const headers = this.createAuthHeaders();
     const body = {
-      userId: userId,
       productId: productId,
       quantity: quantity
     };
+    console.log(body);
     return this.http.post<any>(`${this.apiUrl}/addProduct`, body, { headers });
   }
 
-  deleteProductFromCart(productId: string): Observable<any> {
+  deleteProductFromCart(productId: string | number): Observable<any> {
     const headers = this.createAuthHeaders();
     const body = {
       productId: productId

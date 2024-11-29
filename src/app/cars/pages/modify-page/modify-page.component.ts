@@ -46,6 +46,7 @@ export class ModifyPageComponent {
       brand: ['', Validators.required],
       description: ['', Validators.required],
       price: ['', [Validators.required, Validators.min(0)]],
+      discount: [0, [Validators.required, Validators.min(0), Validators.max(100)]],
       image: ['', Validators.required],
       category: ['', Validators.required]
     });
@@ -56,11 +57,13 @@ export class ModifyPageComponent {
     if (productId) {
       this.productService.getProductById(productId).subscribe(product => {
         this.product = product;
+        console.log(product);
         const selectedCategory = this.categories.find(category => category.id === product.category.id);
         this.productForm.patchValue({
           name: product.name,
           brand: product.brand,
           description: product.description,
+          discount: product.discount * 100,
           price: product.price,
           image: product.image,
           category: selectedCategory
@@ -93,7 +96,7 @@ export class ModifyPageComponent {
   onSubmit(): void {
     if (this.productForm.valid) {
       const updatedProduct = { ...this.product, ...this.productForm.value };
-      console.log('Producto actualizado', updatedProduct); 
+      updatedProduct.discount = Number(updatedProduct.discount)/100;
       this.productService.updateProduct(updatedProduct).subscribe({
         next: (product) => {
           this.router.navigate(['/home'])

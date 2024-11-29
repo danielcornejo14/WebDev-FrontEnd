@@ -14,6 +14,9 @@ import { FormUserComponent } from './users/form-user/form-user.component';
 import { ManageUsersComponent } from './users/manage-users/manage-users.component';
 import { FormProductsComponent } from './products/form-products/form-products.component';
 import { ManageProductsComponent } from './products/manage-products/manage-products.component';
+import { CartPageComponent } from './cars/pages/cart-page/cart-page.component';
+import { WishlistComponent } from './shared/pages/wishlist/wishlist.component';
+import { ProductAlertComponent } from './shared/pages/product-alert/product-alert.component';
 import { OrderDashboardComponent } from './order/order-dashboard/order-dashboard.component';
 import { OrderDetailsComponent } from './order/order-details/order-details.component';
 
@@ -27,16 +30,24 @@ export const routes: Routes = [
       { path: 'product-list/:id', component: ProductPageComponent },
       { path: 'sell', component: SellPageComponent },
       { path: 'modify-product/:id', component: ModifyPageComponent },
+      { path: 'wishlist', component: WishlistComponent },
+      { path: 'cart', component: CartPageComponent },
+      {path: 'productAlert', component: ProductAlertComponent},
+      {
+        path: 'manageUsers',
+        component: ManageUsersComponent,
+      },
+      
       { path: '**', redirectTo: 'landing' },
-    ]
+    ],
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
   },
   {
     path: 'register',
-    component: RegisterComponent
+    component: RegisterComponent,
   },
 
   {
@@ -44,11 +55,11 @@ export const routes: Routes = [
     children: [
       {
         path: 'main',
-        component: MainComponent
+        component: MainComponent,
       },
       {
         path: 'dashboard',
-        component: DashboardComponent
+        component: DashboardComponent,
       },
       {
         path: 'manageOrders',
@@ -58,41 +69,24 @@ export const routes: Routes = [
         path: 'orderDetail',
         component: OrderDetailsComponent
       }
-    ]
-  },
-  {
-    path: 'users',
-    children: [
-      {
-        path: 'addUser',
-        component: FormUserComponent
-      },
-      {
-        path: 'manageUsers',
-        component: ManageUsersComponent
-      },
-      {
-        path: 'editUser',
-        component: FormUserComponent
-      }
-    ]
+    ],
   },
   {
     path: 'products',
     children: [
       {
         path: 'addProduct',
-        component: FormProductsComponent
+        component: FormProductsComponent,
       },
       {
         path: 'manageProducts',
-        component: ManageProductsComponent
+        component: ManageProductsComponent,
       },
       {
         path: 'editProduct',
-        component: FormProductsComponent
-      }
-    ]
+        component: FormProductsComponent,
+      },
+    ],
   },
   {
     path: '404',
@@ -101,10 +95,10 @@ export const routes: Routes = [
   {
     path: '',
     redirectTo: 'home',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: '**',
     redirectTo: '404',
-  }
+  },
 ];

@@ -1,0 +1,27 @@
+.shipping-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espacio entre los campos */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .shipping-container mat-form-field {
+    width: 100%;
+  }
+  
+  .shipping-container button {
+    align-self: flex-end;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .shipping-container button:hover {
+    background-color: #0056b3;
+  }

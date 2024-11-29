@@ -24,8 +24,11 @@
         <span class="spacer"></span>
 
         <div class="button-row">
+          <button *ngIf="isLoggedIn && userRole === 'admin'" mat-button class="button-text" routerLink="productAlert">Alertas</button>
+          <button *ngIf="isLoggedIn && userRole === 'admin'" mat-button class="button-text" routerLink="manageUsers">Usuarios</button>
           <button mat-button class="button-text" routerLink="product-list">Productos</button>
           <button *ngIf="!isLoggedIn" mat-button class="button-text" routerLink="/register">Registrarse</button>
+          <button *ngIf="isLoggedIn" mat-button class="button-text" routerLink="wishlist">Wishlist</button>
           <button *ngIf="isLoggedIn" mat-button class="button-text" routerLink="cart">Cart</button>
           <button *ngIf="isLoggedIn && userRole === 'admin'" mat-button class="button-text" routerLink="sell">Vender</button>
           <button *ngIf="isLoggedIn" mat-button class="button-text" (click)="logout()">Logout</button>

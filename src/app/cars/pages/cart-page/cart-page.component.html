@@ -1,1 +1,32 @@
-<p>cart-page works!</p>
+<mat-vertical-stepper linear #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Carrito de Compras</ng-template>
+      <div class="cart-container">
+        <div class="cart-items">
+          <div *ngIf="productList.length === 0" class="empty-message">
+            No has agregado productos a tu carrito
+          </div>
+          <div *ngFor="let product of productList" class="cart-item">
+            <app-cart-products [product]="product" (removeProduct)="handleRemoveProduct($event)"></app-cart-products>
+          </div>
+        </div>
+        <app-cart-summary [cartItems]="cartItems" [tax]="tax" [total]="total" (proceedToShipping)="nextStep(stepper)"></app-cart-summary>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Información de Envío</ng-template>
+      <app-shipping-form [formGroup]="secondFormGroup" (proceedToPayment)="nextStep(stepper)"></app-shipping-form>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="thirdFormGroup">
+    <form [formGroup]="thirdFormGroup">
+      <ng-template matStepLabel>Información de Pago</ng-template>
+    </form>
+  </mat-step>
+
+</mat-vertical-stepper>
