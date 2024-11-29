@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class CartService {
 
-  private apiUrl = environment.baserURL;
+  private apiUrl = environment.baserURL + "/cart";
 
   constructor(private http: HttpClient) { }
 
@@ -22,8 +22,7 @@ export class CartService {
 
   getCart(): Observable<Cart> {
     const headers = this.createAuthHeaders();
-    debugger;
-    return this.http.get<Cart>(`${this.apiUrl} + /cart`, { headers });
+    return this.http.get<Cart>(`${this.apiUrl}`, { headers });
   }
 
   addProductToCart(userId: string, productId: string, quantity: number): Observable<any> {

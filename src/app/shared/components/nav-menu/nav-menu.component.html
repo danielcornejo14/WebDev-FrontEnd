@@ -26,7 +26,7 @@
         <div class="button-row">
           <button mat-button class="button-text" routerLink="product-list">Productos</button>
           <button *ngIf="!isLoggedIn" mat-button class="button-text" routerLink="/register">Registrarse</button>
-          <button *ngIf="isLoggedIn && userRole === 'user'" mat-button class="button-text" routerLink="cart">Cart</button>
+          <button *ngIf="isLoggedIn" mat-button class="button-text" routerLink="cart">Cart</button>
           <button *ngIf="isLoggedIn && userRole === 'admin'" mat-button class="button-text" routerLink="sell">Vender</button>
           <button *ngIf="isLoggedIn" mat-button class="button-text" (click)="logout()">Logout</button>
           <button *ngIf="!isLoggedIn" mat-button class="button-text" routerLink="/login">Login</button>

@@ -10,13 +10,13 @@ import { Category } from '../models/products/category';
 })
 export class ProductsService {
   private apiUrl = environment.baserURL + '/product';
-  
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient) {}
 
   private createAuthHeaders(): HttpHeaders {
     const token = localStorage.getItem('token');
     return new HttpHeaders({
-      'Authorization': `${token}`
+      Authorization: `${token}`,
     });
   }
 
@@ -29,7 +29,7 @@ export class ProductsService {
     if (!id) {
       throw Error('El id del producto es necesario');
     }
-    const options = {params: {id: id.toString()}};
+    const options = { params: { id: id.toString() } };
     return this.http.get<Product>(`${this.apiUrl}/getById`, options);
   }
 
@@ -37,12 +37,13 @@ export class ProductsService {
     return this.http.get<Product[]>(`${this.apiUrl}/category/${category}`);
   }
 
-  deleteProduct(id: number|string ): Observable<boolean> {
+  deleteProduct(id: number | string): Observable<boolean> {
     const headers = this.createAuthHeaders();
-    return this.http.delete<boolean>(`${this.apiUrl}/deleteProduct/${id}`, { headers })
+    return this.http
+      .delete<boolean>(`${this.apiUrl}/deleteProduct`, { headers, params: { id: id.toString() } })
       .pipe(
-        map(resp => true),
-        catchError(error => of(false))
+        map((resp) => true),
+        catchError((error) => of(false))
       );
   }
 
@@ -52,16 +53,19 @@ export class ProductsService {
     if (!product.id) {
       throw Error('El id del producto es necesario');
     }
- 
+
     const headers = this.createAuthHeaders();
-    return this.http.patch<Product>
-      (`${this.apiUrl}/updateProduct/${product.id}`,
-       product, 
-       { headers });
+    return this.http.put<Product>(
+      `${this.apiUrl}/updateProduct`,
+      product,
+      { headers, params: {productId: product.id.toString()} }
+    );
   }
-  
+
   createProduct(product: Product): Observable<Product> {
     const headers = this.createAuthHeaders();
-    return this.http.post<Product>(`${this.apiUrl}/createProduct`, product, { headers });
+    return this.http.post<Product>(`${this.apiUrl}/createProduct`, product, {
+      headers,
+    });
   }
 }
