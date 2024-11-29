@@ -22,7 +22,7 @@
           {{order.status}}
         </td>
         <td>
-          <app-order-actions [order]="order"></app-order-actions>
+          <app-order-actions [order]="order" (deleteOrder)="deleteOrder($event)" (editOrder)="onEdit($event)"></app-order-actions>
         </td>
       </tr>
     </tbody>

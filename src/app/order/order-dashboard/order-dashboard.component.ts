@@ -1,5 +1,5 @@
 import { OrderService } from './../../cars/services/order.service';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Order } from '../../cars/models/orders/order';
 import { OrderListComponent } from "../order-list/order-list.component";
 import { OrderActionsComponent } from '../order-actions/order-actions.component';
@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './order-dashboard.component.scss',
   imports: [OrderListComponent, CommonModule]
 })
-export class OrderDashboardComponent implements OnInit{
+export class OrderDashboardComponent{
   orders : Order[] = [];
   filterOrders: Order[] = [];
   totalOrders: number = 0;
@@ -32,7 +32,8 @@ export class OrderDashboardComponent implements OnInit{
 
   loadOrders(): void {
     this.orderService.getAllOrders().subscribe(orders => {
-      console.log(orders);
+      this.orders = orders;
+      this.filterOrders = orders;
       this.totalOrders = orders.length;
       this.pendingOrders = orders.filter((order: { status: string; }) => order.status === 'pending').length;
       this.shippedOrders = orders.filter((order: { status: string; }) => order.status === 'shipped').length;
@@ -42,12 +43,11 @@ export class OrderDashboardComponent implements OnInit{
   }
   
 
-  ngOnChanges(value:string): void {
-    this.filterOrders = this.orders.filter(order => 
-      order.status.toLowerCase().includes(value.toLowerCase())
-    );
-    console.log(this.filterOrders);
-  }
 
+
+  onSearch(orderId: string | number): void {
+    if(!orderId || orderId === '') this.loadOrders();
+    this.filterOrders = this.orders.filter(order => order.id === +orderId || order._id === orderId);
+  }
 
 }

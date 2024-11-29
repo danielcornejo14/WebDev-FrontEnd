@@ -1,13 +1,17 @@
-<p-inputGroup class="width-input">
+<form class="inputForm">
+    <mat-form-field class="full-width">
     <input
         type="text"
-        pInputText
         placeholder="Search..."
+        matInput
+        [formControl] = "myControl"
         (keyup.enter)="emitValue(textInput.value)"
         #textInput
-    />
-    <p-inputGroupAddon>
-        <i class="pi pi-search"></i>
-    </p-inputGroupAddon>
-
-</p-inputGroup>
+        [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+        @for (option of suggestions; track option) {
+            <mat-option [value]="option">{{option}}</mat-option>
+        }
+    </mat-autocomplete>
+    </mat-form-field>
+</form>

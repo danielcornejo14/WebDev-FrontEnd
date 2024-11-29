@@ -14,7 +14,7 @@ import { RouterModule } from '@angular/router';
 export class OrderActionsComponent {
 
   @Input() order!: Order;
-  @Output() deleteUser = new EventEmitter<number | string>();
+  @Output() deleteOrder = new EventEmitter<number | string>();
   @Output() loadOrders = new EventEmitter<Order>();
   @Output() editOrder = new EventEmitter<Order>();
 
@@ -23,20 +23,19 @@ export class OrderActionsComponent {
   onStatusChange(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     const newStatus = selectElement.value as Order['status'];
-    console.log("New status:", newStatus);
-    console.log("Order:", this.order._id);
     if (this.order && this.order._id) {
-      this.updateStatus(newStatus, this.order._id);
+      this.order.status = newStatus;
+      this.updateOrder(this.order);
     } else {
       console.error("Order or Order ID is undefined");
     }
   }
 
-  updateStatus(newStatus: Order['status'], id: number | string): void {
-    this.orderService.updateOrder(id.toString(), newStatus).subscribe({
+  updateOrder(order: Order): void {
+
+    this.orderService.updateOrder(order._id!,order).subscribe({
       next: () => {
-        this.order.status = newStatus;
-        console.log("Order status updated to:", newStatus);
+        window.location.reload();
       },
       error: (error) => {
         console.error("Error updating order status:", error);
@@ -45,13 +44,9 @@ export class OrderActionsComponent {
   }
 
   onDelete(id: number | string): void {
-    this.deleteUser.emit(id);
+    this.deleteOrder.emit(id);
   }
 
-  // onloadOrders(id: number | string): void {
-  //   console.log("Loading orders...");
-  //   this.loadOrders.emit(id);
-  // }
 
   onEdit(order: Order): void {
     console.log(order._id);

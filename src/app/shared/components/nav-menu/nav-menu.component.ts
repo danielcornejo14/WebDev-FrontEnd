@@ -1,4 +1,5 @@
 import { User } from './../../../cars/models/users/user';
+import { Product } from './../../../cars/models/products/product';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -10,6 +11,7 @@ import { SearchBoxComponent } from "../search-box/search-box.component";
 import { AuthService } from './../../../cars/services/auth.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { ProductsService } from '../../../cars/services/products.service';
 
 
 @Component({
@@ -23,7 +25,7 @@ import { Router } from '@angular/router';
     MatListModule,
     RouterModule,
     SearchBoxComponent,
-    CommonModule
+    CommonModule,
 ],
   templateUrl: './nav-menu.component.html',
   styleUrl: './nav-menu.component.scss'
@@ -32,10 +34,13 @@ export class NavMenuComponent {
   isLoggedIn: boolean = false;
   userRole: string | null = null;
   @Output() editUser = new EventEmitter<User>();
+  Product: Product[] = [];
+  productNames: string[] = [];
 
   constructor(
     private authService: AuthService,
-    private routerLink: Router
+    private routerLink: Router,
+    private productService: ProductsService
   ) { }
 
 
@@ -45,6 +50,7 @@ export class NavMenuComponent {
       const userDetails = this.authService.getUserDetails();
       this.userRole = userDetails ? userDetails.role : null;
     }
+    this.loadProducts();
   }
 
   logout(): void {
@@ -58,4 +64,25 @@ export class NavMenuComponent {
     this.editUser.emit(user);
   }
 
+  loadProducts(): void {
+    this.productService.getProducts().subscribe((products: Product[]) => {
+      this.Product = products;
+      this.productNames = products.map(product => product.name);
+    });
+  }
+  getProductNames(): void {
+    this.productNames = this.Product.map(product => product.name);
+  }
+
+  searchProduct(value: string): void {
+    const matchedProduct = this.Product.find(product => product.name === value);
+    if (matchedProduct) {
+      this.routerLink.navigate(['home/product-list/', matchedProduct.id]).then(
+        () => window.location.reload()
+      );  ;
+
+    }else {
+      console.log('Product not found');
+    }
+  }
 }

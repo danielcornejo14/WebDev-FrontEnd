@@ -32,27 +32,29 @@ export class OrderService {
 
 
   getOrderById(orderId: string): Observable<Order> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.get<Order>(`${this.apiUrl}/orders/${orderId}`, { headers });
+    const headers = this.createAuthHeaders();
+    
+    return this.http.get<Order>(`${this.apiUrl}/getByOrderId`, { headers, params: { orderId } });
   }
 
   getOrdersByUserId(userId: string): Observable<Order> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.get<Order>(`${this.apiUrl}/orders/getOrdersByUserId/${userId}`, { headers });
+    const headers = this.createAuthHeaders();
+    return this.http.get<Order>(`${this.apiUrl}/getOrdersByUserId`, { headers, params: { userId } });
   }
 
   createOrder(orderData: any): Observable<Order> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<Order>(`${this.apiUrl}/orders/createOrder`, orderData, { headers });
+    const headers = this.createAuthHeaders();
+    return this.http.post<Order>(`${this.apiUrl}/createOrder`, orderData, { headers });
   }
 
   updateOrder(orderId: string, orderData: any ): Observable<Order> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.put<Order>(`${this.apiUrl}/orders/updateOrder/${orderId}`, orderData, { headers });
+    console.log("Order data:", orderData);
+    const headers = this.createAuthHeaders();
+    return this.http.put<Order>(`${this.apiUrl}/updateOrder`, orderData, { headers, params: { orderId } });
   }
 
   deleteOrder(orderId: string): Observable<Order> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.delete<Order>(`${this.apiUrl}/orders/deleteOrder/${orderId}`, { headers });
+    const headers = this.createAuthHeaders();
+    return this.http.delete<Order>(`${this.apiUrl}/deleteOrder`, { headers, params: { orderId } });
   }
 }
