@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 import { CartService } from '../../services/cart.service';
 import { ProductsService } from '../../services/products.service';
@@ -19,6 +22,7 @@ import { CartSummaryComponent } from "../../components/cart-summary/cart-summary
 import { ShippingFormComponent } from "../../components/shipping-form/shipping-form.component";
 import { PaymentMethodComponent } from "../../components/payment-method/payment-method.component";
 import { ReviewOrderComponent } from '../../components/review-order/review-order.component';
+import { ConfirmOrderDialogComponent } from '../../components/confirm-order-dialog/confirm-order-dialog.component';
 
 
 @Component({
@@ -38,25 +42,27 @@ import { ReviewOrderComponent } from '../../components/review-order/review-order
     MatFormFieldModule,
     MatInputModule,
     PaymentMethodComponent,
-    ReviewOrderComponent
+    ReviewOrderComponent,
+    
   ],
   templateUrl: './cart-page.component.html',
   styleUrls: ['./cart-page.component.scss']
 })
 export class CartPageComponent implements OnInit {
-  cartFormGroup: FormGroup;
-  shippingFormGroup: FormGroup;
-  cardFormGroup: FormGroup;
-  cart: Cart = {} as Cart;
-  cartItems: { product: Product, quantity: number }[] = [];
-  productList: Product[] = [];
-  tax: number = 5;
-  total: number = this.tax;
+  protected cartFormGroup: FormGroup;
+  protected shippingFormGroup: FormGroup;
+  protected cardFormGroup: FormGroup;
+  protected cart: Cart = {} as Cart;
+  protected cartItems: { product: Product, quantity: number }[] = [];
+  protected productList: Product[] = [];
+  protected tax: number = 5;
+  protected total: number = this.tax;
 
   constructor(
     private _formBuilder: FormBuilder,
     private cartService: CartService,
     private productService: ProductsService,
+    private dialog: MatDialog,
   ) {
 
     this.cartFormGroup = this._formBuilder.group({});
@@ -71,7 +77,7 @@ export class CartPageComponent implements OnInit {
     this.cardFormGroup = this._formBuilder.group({
       cardNumber: ['', [Validators.required, Validators.pattern('^[0-9]{16}$')]],
       cardName: ['', Validators.required],
-      expiryDate: ['', [Validators.required, Validators.pattern('^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$')]],
+      expiryDate: ['', [Validators.required, Validators.pattern('^(0[1-9]|1[0-2])\/([0-9]{4}|[0-9]{2})$')]],
       cvv: ['', [Validators.required, Validators.pattern('^[0-9]{3}$')]],
       paymentMethod: ['', [Validators.required, Validators.pattern('^(credit|paypal|googlepay|applepay)$')]]
     });
@@ -135,7 +141,7 @@ export class CartPageComponent implements OnInit {
   onPlaceOrder(): void {
   if (this.shippingFormGroup.valid && this.cardFormGroup.valid) {
       this.cartService.checkout(this.cardFormGroup.value.paymentMethod).subscribe(() => {
-        console.log('Order placed successfully');
+            const dialogRef = this.dialog.open(ConfirmOrderDialogComponent);
             }, error => {
         console.error('Error placing order:', error);
       });
