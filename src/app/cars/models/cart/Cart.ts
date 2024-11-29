@@ -1,8 +1,9 @@
-import { Stock } from "../products/stock";
+import { CartItem } from "./cart-Item";
 
 export interface Cart {
     userId: number;
-    products: Stock[];
+    products: CartItem[];
+    name?: string;
     createdAt: Date;
     updatedAt: Date;
 }

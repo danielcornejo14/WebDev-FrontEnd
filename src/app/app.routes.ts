@@ -14,6 +14,7 @@ import { FormUserComponent } from './users/form-user/form-user.component';
 import { ManageUsersComponent } from './users/manage-users/manage-users.component';
 import { FormProductsComponent } from './products/form-products/form-products.component';
 import { ManageProductsComponent } from './products/manage-products/manage-products.component';
+import { CartPageComponent } from './cars/pages/cart-page/cart-page.component';
 import { WishlistComponent } from './shared/pages/wishlist/wishlist.component';
 
 export const routes: Routes = [
@@ -27,6 +28,8 @@ export const routes: Routes = [
       { path: 'sell', component: SellPageComponent },
       { path: 'modify-product/:id', component: ModifyPageComponent },
       { path: 'wishlist', component: WishlistComponent },
+      { path: 'cart', component: CartPageComponent },
+      
       { path: '**', redirectTo: 'landing' },
     ],
   },
