@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Update stock</h1>
+<mat-dialog-content>
+  <p>Current stock: {{ data.stock }}</p>
+  <mat-form-field appearance="outline">
+    <input matInput type="number" placeholder="New stock" [(ngModel)]="quantity">
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-raised-button (click)="onRestock()" cdkFocusInitial>Update</button>
+</mat-dialog-actions>

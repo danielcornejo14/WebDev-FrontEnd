@@ -16,6 +16,7 @@ import { FormProductsComponent } from './products/form-products/form-products.co
 import { ManageProductsComponent } from './products/manage-products/manage-products.component';
 import { CartPageComponent } from './cars/pages/cart-page/cart-page.component';
 import { WishlistComponent } from './shared/pages/wishlist/wishlist.component';
+import { ProductAlertComponent } from './shared/pages/product-alert/product-alert.component';
 
 export const routes: Routes = [
   {
@@ -29,6 +30,11 @@ export const routes: Routes = [
       { path: 'modify-product/:id', component: ModifyPageComponent },
       { path: 'wishlist', component: WishlistComponent },
       { path: 'cart', component: CartPageComponent },
+      {path: 'productAlert', component: ProductAlertComponent},
+      {
+        path: 'manageUsers',
+        component: ManageUsersComponent,
+      },
       
       { path: '**', redirectTo: 'landing' },
     ],
@@ -52,23 +58,6 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent,
-      },
-    ],
-  },
-  {
-    path: 'users',
-    children: [
-      {
-        path: 'addUser',
-        component: FormUserComponent,
-      },
-      {
-        path: 'manageUsers',
-        component: ManageUsersComponent,
-      },
-      {
-        path: 'editUser',
-        component: FormUserComponent,
       },
     ],
   },

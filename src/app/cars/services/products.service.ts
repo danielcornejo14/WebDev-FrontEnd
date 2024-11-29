@@ -68,4 +68,20 @@ export class ProductsService {
       headers,
     });
   }
+
+  fetchUnstockedProducts(): Observable<Product[]> {
+    const headers = this.createAuthHeaders();
+    return this.http.get<Product[]>(`${this.apiUrl}/quantityAlert`, {headers});
+  }
+
+  replenishStock(productId: string | number, quantity: number): Observable<Product> {
+    const headers = this.createAuthHeaders();
+    const stock = {
+      productId: productId,
+      quantity: quantity
+    }
+    return this.http.put<Product>(`${this.apiUrl}/restock`, stock, {headers});
+
+  }
+
 }
